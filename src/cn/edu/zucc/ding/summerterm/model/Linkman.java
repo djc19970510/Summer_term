@@ -1,6 +1,8 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Linkman {
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+public class Linkman implements getID {
     private int ID;
     private String Name;
     private String Phone;

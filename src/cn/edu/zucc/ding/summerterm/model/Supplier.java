@@ -1,6 +1,8 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Supplier {
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+public class Supplier implements getID {
     private int ID;
     private String Name;
     private String Address;

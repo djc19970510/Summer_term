@@ -1,8 +1,10 @@
 package cn.edu.zucc.ding.summerterm.model;
 
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
 import java.util.Date;
 
-public class Materialsstoreorder {
+public class Materialsstoreorder implements getID {
     private int ID;
     private double Number;
     private Date Date;

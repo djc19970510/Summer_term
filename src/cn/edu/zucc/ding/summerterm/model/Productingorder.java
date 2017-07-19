@@ -1,6 +1,8 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Productingorder {
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+public class Productingorder implements getID {
     private int ID;
     private int ProductionID;
     private double ProductionNumber;

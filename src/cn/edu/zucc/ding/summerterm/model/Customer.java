@@ -1,6 +1,10 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Customer {
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+import java.util.List;
+
+public class Customer implements getID {
     private int ID;
     private String Name;
     private String Add;
@@ -23,6 +27,10 @@ public class Customer {
 
     public int getID() {
         return ID;
+    }
+
+    public List<String> getAll() {
+        return null;
     }
 
     public void setName(String Name) {

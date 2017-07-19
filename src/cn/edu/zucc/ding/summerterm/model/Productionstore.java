@@ -1,6 +1,8 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Productionstore {
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+public class Productionstore implements getID {
     private int ID;
     private double Number;
     private String Add;

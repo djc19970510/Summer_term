@@ -1,7 +1,9 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-public class Materialsstore {
-    private int MaterialsStoreID;
+import cn.edu.zucc.ding.summerterm.Icontrol.getID;
+
+public class Materialsstore implements getID {
+    private int ID;
     private double Number;
     private String Add;
     private int MaterialsID;
@@ -9,20 +11,20 @@ public class Materialsstore {
     public Materialsstore() {
     }
 
-    public Materialsstore(int MaterialsStoreID, double Number, String Add, int MaterialsID) {
+    public Materialsstore(int ID, double Number, String Add, int MaterialsID) {
         this();
-        this.MaterialsStoreID = MaterialsStoreID;
+        this.ID = ID;
         this.Number = Number;
         this.Add = Add;
         this.MaterialsID = MaterialsID;
     }
 
-    public void setMaterialsStoreID(int MaterialsStoreID) {
-        this.MaterialsStoreID = MaterialsStoreID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getMaterialsStoreID() {
-        return MaterialsStoreID;
+    public int getID() {
+        return ID;
     }
 
     public void setNumber(double Number) {
@@ -48,4 +50,5 @@ public class Materialsstore {
     public int getMaterialsID() {
         return MaterialsID;
     }
+
 }
