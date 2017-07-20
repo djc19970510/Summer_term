@@ -11,6 +11,7 @@ public class Customer implements getID {
     private int LinkID;
 
     public Customer() {
+
     }
 
     public Customer(int ID, String Name, String Add, int LinkID) {

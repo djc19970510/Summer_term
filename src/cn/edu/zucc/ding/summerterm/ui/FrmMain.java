@@ -22,6 +22,7 @@ public class FrmMain extends JFrame implements ActionListener{
     private JButton menu_Linkman=new JButton("联系人管理");
 
 
+
     public FrmMain(){
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         this.setTitle("生产管理系统");
