@@ -3,15 +3,16 @@ package cn.edu.zucc.ding.summerterm.model;
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
 public class Productiondetails implements getID {
+
+    private int ID;
     private int ProductionID;
     private int MaterialsID;
     private double MaterialsNumber;
-    private int ID;
 
     public Productiondetails() {
     }
 
-    public Productiondetails(int ProductionID, int MaterialsID, double MaterialsNumber, int ID) {
+    public Productiondetails(int ID,int ProductionID, int MaterialsID, double MaterialsNumber) {
         this();
         this.ProductionID = ProductionID;
         this.MaterialsID = MaterialsID;

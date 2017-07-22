@@ -6,19 +6,21 @@ public class Supplier implements getID {
     private int ID;
     private String Name;
     private String Address;
-    private int LinkID;
+    private String LinkName;
     private String Introduction;
+    private String LinkPhone;
 
     public Supplier() {
     }
 
-    public Supplier(int ID, String Name, String Address, int LinkID, String Introduction) {
+    public Supplier(int ID, String Name, String Address, String LinkName, String Introduction, String LinkPhone) {
         this();
         this.ID = ID;
         this.Name = Name;
         this.Address = Address;
-        this.LinkID = LinkID;
+        this.LinkName = LinkName;
         this.Introduction = Introduction;
+        this.LinkPhone = LinkPhone;
     }
 
     public void setID(int ID) {
@@ -45,12 +47,12 @@ public class Supplier implements getID {
         return Address;
     }
 
-    public void setLinkID(int LinkID) {
-        this.LinkID = LinkID;
+    public void setLinkName(String LinkName) {
+        this.LinkName = LinkName;
     }
 
-    public int getLinkID() {
-        return LinkID;
+    public String getLinkName() {
+        return LinkName;
     }
 
     public void setIntroduction(String Introduction) {
@@ -59,5 +61,13 @@ public class Supplier implements getID {
 
     public String getIntroduction() {
         return Introduction;
+    }
+
+    public void setLinkPhone(String LinkPhone) {
+        this.LinkPhone = LinkPhone;
+    }
+
+    public String getLinkPhone() {
+        return LinkPhone;
     }
 }

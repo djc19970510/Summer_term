@@ -4,11 +4,12 @@ import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 import cn.edu.zucc.ding.summerterm.model.Customer;
 
 import java.lang.reflect.Field;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DatabaseOP {
     public static String select(String element,String table,String condition){
@@ -21,6 +22,7 @@ public class DatabaseOP {
     public static <E extends getID>String update(E e){
         String table = e.getClass().getSimpleName();
         List<String> result = getField(firstUpperCase(table));
+        result.remove("ID");
         String sql = "Update "+table+" ";
         sql+= "set ";
         for (int i=0;i<result.size();i++){
@@ -90,12 +92,14 @@ public class DatabaseOP {
     }
 
     public static void main(String[] args){
-        Customer c = new Customer();
-        try {
-            System.out.println(insert(c));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Customer c= new Customer();
+        System.out.print(select("*","Customer",""));
+    }
+
+    public static boolean regex(String regex, String value) {
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(value);
+        return m.find();
     }
 
 }

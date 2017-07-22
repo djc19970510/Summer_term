@@ -2,59 +2,63 @@ package cn.edu.zucc.ding.summerterm.model;
 
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
-import java.util.List;
-
 public class Customer implements getID {
     private int ID;
     private String Name;
-    private String Add;
-    private int LinkID;
+    private String Address;
+    private String LinkName;
+    private String LinkPhone;
 
     public Customer() {
-
     }
 
-    public Customer(int ID, String Name, String Add, int LinkID) {
+    public Customer(int ID, String Name, String Add, String LinkName, String LinkPhone) {
         this();
         this.ID = ID;
         this.Name = Name;
-        this.Add = Add;
-        this.LinkID = LinkID;
+        this.Address = Add;
+        this.LinkName = LinkName;
+        this.LinkPhone = LinkPhone;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public List<String> getAll() {
-        return null;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
     public String getName() {
         return Name;
     }
 
-    public void setAdd(String Add) {
-        this.Add = Add;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getAdd() {
-        return Add;
+    public String getAddress() {
+        return Address;
     }
 
-    public void setLinkID(int LinkID) {
-        this.LinkID = LinkID;
+    public void setAddress(String address) {
+        Address = address;
     }
 
-    public int getLinkID() {
-        return LinkID;
+    public String getLinkName() {
+        return LinkName;
+    }
+
+    public void setLinkName(String linkName) {
+        LinkName = linkName;
+    }
+
+    public String getLinkPhone() {
+        return LinkPhone;
+    }
+
+    public void setLinkPhone(String linkPhone) {
+        LinkPhone = linkPhone;
     }
 }

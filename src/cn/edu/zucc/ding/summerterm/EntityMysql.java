@@ -15,7 +15,8 @@ public class EntityMysql {
 
 
     private String packageOutPath = "cn.edu.zucc.ding.summerterm.model";
-    private static String[] tablenames = {"customer","linkman", "materials", "materialsorder", "materialsstore", "materialsstoreorder", "productingorder", "production", "productiondetails", "productionorder", "productionstore", "productionstoreorder", "productiontype", "supplier", "supplier_has_materials"};
+    //private static String[] tablenames = {"customer","linkman", "materials", "materialsorder", "materialsstore", "materialsstoreorder", "productingorder", "production", "productiondetails", "productionorder", "productionstore", "productionstoreorder", "productiontype", "supplier", "supplier_has_materials"};
+    private static String[] tablenames = {"customer", "supplier"};
     private String[] colnames;
     private String[] colTypes;
     private boolean util = false;

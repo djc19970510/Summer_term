@@ -2,12 +2,21 @@ package cn.edu.zucc.ding.summerterm.model;
 
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
+import java.sql.Date;
 public class Productionorder implements getID {
     private int ID;
+
     private double price;
     private double number;
-    private int ProductionID;
-    private int CustomerID;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Productionorder() {
     }
@@ -17,8 +26,6 @@ public class Productionorder implements getID {
         this.ID = ID;
         this.price = price;
         this.number = number;
-        this.ProductionID = ProductionID;
-        this.CustomerID = CustomerID;
     }
 
     public void setID(int ID) {
@@ -43,21 +50,5 @@ public class Productionorder implements getID {
 
     public double getNumber() {
         return number;
-    }
-
-    public void setProductionID(int ProductionID) {
-        this.ProductionID = ProductionID;
-    }
-
-    public int getProductionID() {
-        return ProductionID;
-    }
-
-    public void setCustomerID(int CustomerID) {
-        this.CustomerID = CustomerID;
-    }
-
-    public int getCustomerID() {
-        return CustomerID;
     }
 }
