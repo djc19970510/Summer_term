@@ -51,16 +51,16 @@ public class FrmProduction extends JPanel implements ActionListener {
 
     private JPanel main_right_task = new JPanel();
         private JPanel main_right_center_task = new JPanel();
-            private Object detailTitle[] = {"产品ID","产品名称", "产品价格"};
+            private Object detailTitle[] = {"材料名称","材料数量"};
             private Object detailData[][];
             DefaultTableModel detailtablmod = new DefaultTableModel();
             List<Productiondetails> productiondetails;
             private JTable table_productiondetails =  new JTable(detailtablmod);
             private JScrollPane table_scrollproductiondetails = new JScrollPane(table_productiondetails);
         private JPanel main_right_buttom_task = new JPanel();
-            private JButton add_detail = new JButton("增加产品");
-            private JButton del_detail = new JButton("删除产品");
-            private JButton mod_detail = new JButton("修改产品");
+            private JButton add_detail = new JButton("增加产品细节");
+            private JButton del_detail = new JButton("删除产品细节");
+            private JButton mod_detail = new JButton("修改产品细节");
 
 
 
@@ -118,14 +118,22 @@ public class FrmProduction extends JPanel implements ActionListener {
         //右侧任务栏
         main_right_task.setVisible(true);
         main_right_task.setBackground(new Color(222,0,0));
-        main_right_task.setPreferredSize(new Dimension(400,1));
-
-
+//        main_right_task.setPreferredSize(new Dimension(400,1));
+        main_right_task.setLayout(new BorderLayout());
+            //右侧中部任务栏
+            main_right_task.add(main_right_center_task,BorderLayout.CENTER);
+            main_right_center_task.add(table_scrollproductiondetails,BorderLayout.CENTER);
+            //右侧底部任务栏
+            main_right_task.add(main_right_buttom_task,BorderLayout.SOUTH);
+            main_right_buttom_task.add(add_detail);
+            main_right_buttom_task.add(del_detail);
+            main_right_buttom_task.add(mod_detail);
 
 
 
         this.reloadAll();
         this.reloadAllType();
+        this.reloadAllDetails();
     }
 
     public void reloadAllType() {
@@ -156,8 +164,18 @@ public class FrmProduction extends JPanel implements ActionListener {
         return;
     }
 
+
     public void reloadAllDetails(){
         productiondetails = (new ProductionDetailControl()).loadAllProductiondetails();
+        detailData = new Object[productiondetails.size()][2];
+        for (int i = 0; i < productiondetails.size(); i++) {
+            detailData[i][0] = productiondetails.get(i).getMaterialsID()+"";
+            detailData[i][1] = productiondetails.get(i).getMaterialsNumber()+"";
+        }
+        detailtablmod.setDataVector(detailData, detailTitle);
+        this.table_production.validate();
+        this.table_production.repaint();
+        return;
     }
 
     @Override
