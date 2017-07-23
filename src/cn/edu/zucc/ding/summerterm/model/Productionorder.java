@@ -5,7 +5,6 @@ import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 import java.sql.Date;
 public class Productionorder implements getID {
     private int ID;
-
     private double price;
     private double number;
     private Date date;

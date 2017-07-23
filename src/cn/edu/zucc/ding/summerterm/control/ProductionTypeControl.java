@@ -39,16 +39,39 @@ public class ProductionTypeControl implements IProductiontypeControl{
 
     @Override
     public void modifyProductiontype(Productiontype productiontype) {
-
+        String sql = DatabaseOP.update(productiontype);
+        try {
+            Connection conn =DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,productiontype.getName());
+            pst.setString(2,productiontype.getIntroduction());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void addProductiontype(Productiontype productiontype) {
-
+        String sql = DatabaseOP.insert(productiontype);
+        try {
+            Connection conn =DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,productiontype.getName());
+            pst.setString(2,productiontype.getIntroduction());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delProductiontype(Productiontype productiontype) {
-
+        String sql = DatabaseOP.delete(productiontype);
+        try {
+            Connection conn =DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

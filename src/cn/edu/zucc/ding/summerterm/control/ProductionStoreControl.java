@@ -1,7 +1,7 @@
 package cn.edu.zucc.ding.summerterm.control;
 
-import cn.edu.zucc.ding.summerterm.Icontrol.IProductiondetailsControl;
-import cn.edu.zucc.ding.summerterm.model.Productiondetails;
+import cn.edu.zucc.ding.summerterm.Icontrol.IProductionstoreControl;
+import cn.edu.zucc.ding.summerterm.model.Productionstore;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
@@ -12,21 +12,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductionDetailControl implements IProductiondetailsControl {
+public class ProductionStoreControl implements IProductionstoreControl {
     @Override
-    public List<Productiondetails> loadAllProductiondetails() {
-        List<Productiondetails> result = new ArrayList<Productiondetails>();
-        String sql = DatabaseOP.select("*","productiondetails","");
+    public List<Productionstore> loadAllProductionstore() {
+        List<Productionstore> result = new ArrayList<Productionstore>();
+        String sql = DatabaseOP.select("*","productionstore","");
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                Productiondetails p = new Productiondetails(
+                Productionstore p = new Productionstore(
                         rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getDouble(4)
+                        rs.getDouble(2),
+                        rs.getString(3),
+                        rs.getInt(4)
                 );
                 result.add(p);
             }
@@ -37,15 +37,15 @@ public class ProductionDetailControl implements IProductiondetailsControl {
     }
 
     @Override
-    public void modifyProductiondetails(Productiondetails productiondetails) {
-        String sql = DatabaseOP.update(productiondetails);
+    public void modifyProductionstore(Productionstore productionstore) {
+        String sql = DatabaseOP.update(productionstore);
         System.out.println(sql);
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1,productiondetails.getProductionID());
-            pst.setInt(2,productiondetails.getMaterialsID());
-            pst.setDouble(3,productiondetails.getMaterialsNumber());
+            pst.setDouble(1,productionstore.getNumber());
+            pst.setString(2,productionstore.getAddress());
+            pst.setInt(3,productionstore.getProductionID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,15 +53,15 @@ public class ProductionDetailControl implements IProductiondetailsControl {
     }
 
     @Override
-    public void addProductiondetails(Productiondetails productiondetails) {
-        String sql = DatabaseOP.insert(productiondetails);
-        System.out.print(sql);
+    public void addProductionstore(Productionstore productionstore) {
+        String sql = DatabaseOP.insert(productionstore);
+        System.out.println(sql);
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1,productiondetails.getProductionID());
-            pst.setInt(2,productiondetails.getMaterialsID());
-            pst.setDouble(3,productiondetails.getMaterialsNumber());
+            pst.setDouble(1,productionstore.getNumber());
+            pst.setString(2,productionstore.getAddress());
+            pst.setInt(3,productionstore.getProductionID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,8 +69,8 @@ public class ProductionDetailControl implements IProductiondetailsControl {
     }
 
     @Override
-    public void delProductiondetails(Productiondetails productiondetails) {
-        String sql = DatabaseOP.delete(productiondetails);
+    public void delProductionstore(Productionstore productionstore) {
+        String sql = DatabaseOP.delete(productionstore);
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -78,8 +78,5 @@ public class ProductionDetailControl implements IProductiondetailsControl {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

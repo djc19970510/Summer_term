@@ -115,7 +115,6 @@ public class FrmProduction extends JPanel implements ActionListener {
             main_center_center_task.setLayout(new BorderLayout());
             main_center_center_task.add(table_scrollproduction,BorderLayout.CENTER);
 
-
         //右侧任务栏
         main_right_task.setVisible(true);
         main_right_task.setBackground(new Color(222,0,0));

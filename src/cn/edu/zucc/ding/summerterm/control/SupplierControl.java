@@ -5,7 +5,6 @@ import cn.edu.zucc.ding.summerterm.model.Supplier;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,18 +82,15 @@ public class SupplierControl implements ISupplierControl {
 
     @Override
     public void delSupplier(Supplier supplier) {
-
+        String sql = DatabaseOP.delete(supplier);
+        try {
+            Connection conn =DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args){
-        SupplierControl sc = new SupplierControl();
-        Supplier s = new Supplier();
-        s.setID(1);
-        s.setName("1");
-        s.setAddress("1");
-        s.setLinkName("1");
-        s.setLinkPhone("1");
-        s.setIntroduction("1");
-        sc.modifySupplier(s);
-    }
+
 }

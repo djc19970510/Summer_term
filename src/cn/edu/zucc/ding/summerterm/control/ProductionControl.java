@@ -38,16 +38,45 @@ public class ProductionControl implements IProductionControl {
 
     @Override
     public void modifyProduction(Production production) {
-
+        String sql = DatabaseOP.update(production);
+        System.out.print(sql);
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,production.getName());
+            pst.setDouble(2,production.getPrice());
+            pst.setInt(3,production.getProductionTypeID());
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void addProduction(Production production) {
-
+        String sql = DatabaseOP.insert(production);
+        System.out.print(sql);
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,production.getName());
+            pst.setDouble(2,production.getPrice());
+            pst.setInt(3,production.getProductionTypeID());
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delProduction(Production production) {
-
+        String sql = DatabaseOP.delete(production);
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

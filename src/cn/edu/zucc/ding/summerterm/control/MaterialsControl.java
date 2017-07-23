@@ -1,7 +1,7 @@
 package cn.edu.zucc.ding.summerterm.control;
 
-import cn.edu.zucc.ding.summerterm.Icontrol.ICustomerControl;
-import cn.edu.zucc.ding.summerterm.model.Customer;
+import cn.edu.zucc.ding.summerterm.Icontrol.IMaterialsControl;
+import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
@@ -12,24 +12,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerControl implements ICustomerControl {
+public class MaterialsControl implements IMaterialsControl {
     @Override
-    public List<Customer> loadAllCustomer() {
-        List<Customer> result = null;
-        String sql = DatabaseOP.select("*","Customer","");
+    public List<Materials> loadAllMaterials() {
+        List<Materials> result = null;
+        String sql = DatabaseOP.select("*","materials","");
         Connection conn = null;
         try {
             conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            result = new ArrayList<Customer>();
+            result = new ArrayList<Materials>();
             while(rs.next()){
-                Customer s = new Customer(
+                Materials s = new Materials(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5)
+                        rs.getDouble(3),
+                        rs.getString(4)
                 );
                 result.add(s);
             }
@@ -40,16 +39,14 @@ public class CustomerControl implements ICustomerControl {
     }
 
     @Override
-    public void modifyCustomer(Customer c) {
-        String sql = DatabaseOP.update(c);
+    public void modifyMaterials(Materials materials) {
+        String sql = DatabaseOP.update(materials);
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst =conn.prepareStatement(sql);
-            System.out.println(sql);
-            pst.setString(1,c.getName());
-            pst.setString(2,c.getAddress());
-            pst.setString(3,c.getLinkName());
-            pst.setString(4,c.getLinkPhone());
+            pst.setString(1,materials.getName());
+            pst.setDouble(2,materials.getMaterialsBasePrice());
+            pst.setString(3,materials.getIntroduction());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,15 +54,14 @@ public class CustomerControl implements ICustomerControl {
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        String sql = DatabaseOP.insert(customer);
+    public void addMaterials(Materials materials) {
+        String sql = DatabaseOP.insert(materials);
         try {
             Connection conn = DBUtil.getConnection();
-            PreparedStatement pst= conn.prepareStatement(sql);
-            pst.setString(1,customer.getName());
-            pst.setString(2,customer.getAddress());
-            pst.setString(3,customer.getLinkName());
-            pst.setString(4,customer.getLinkPhone());
+            PreparedStatement pst =conn.prepareStatement(sql);
+            pst.setString(1,materials.getName());
+            pst.setDouble(2,materials.getMaterialsBasePrice());
+            pst.setString(3,materials.getIntroduction());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,10 +69,10 @@ public class CustomerControl implements ICustomerControl {
     }
 
     @Override
-    public void delCustomer(Customer customer) {
-        String sql = DatabaseOP.delete(customer);
+    public void delMaterials(Materials materials) {
+        String sql = DatabaseOP.delete(materials);
         try {
-            Connection conn = DBUtil.getConnection();
+            Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
         } catch (SQLException e) {
