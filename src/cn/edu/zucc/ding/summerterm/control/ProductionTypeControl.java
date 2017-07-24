@@ -15,6 +15,27 @@ import java.util.List;
 
 public class ProductionTypeControl implements IProductiontypeControl{
 
+    public List<Productiontype> loadSomeProductiontype(String string){
+        List<Productiontype> productiontypes = new ArrayList<Productiontype>();
+        String sql = DatabaseOP.select("*","Productiontype","where name like '%"+string+"%' or introduction like '%"+string+"%'");
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Productiontype pt = new Productiontype(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                );
+                productiontypes.add(pt);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productiontypes;
+    }
+
     @Override
     public List<Productiontype> loadAllProductiontype() {
         List<Productiontype> productiontypes = new ArrayList<Productiontype>();
@@ -45,6 +66,7 @@ public class ProductionTypeControl implements IProductiontypeControl{
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,productiontype.getName());
             pst.setString(2,productiontype.getIntroduction());
+            pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,6 +80,7 @@ public class ProductionTypeControl implements IProductiontypeControl{
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,productiontype.getName());
             pst.setString(2,productiontype.getIntroduction());
+            pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

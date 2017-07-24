@@ -7,18 +7,16 @@ public class Materialsorder implements getID {
     private double Price;
     private double Number;
     private int MaterialsID;
-    private int SupplierID;
 
     public Materialsorder() {
     }
 
-    public Materialsorder(int ID, double Price, double Number, int MaterialsID, int SupplierID) {
+    public Materialsorder(int ID, double Price, double Number, int MaterialsID) {
         this();
         this.ID = ID;
         this.Price = Price;
         this.Number = Number;
         this.MaterialsID = MaterialsID;
-        this.SupplierID = SupplierID;
     }
 
     public void setID(int ID) {
@@ -51,13 +49,5 @@ public class Materialsorder implements getID {
 
     public int getMaterialsID() {
         return MaterialsID;
-    }
-
-    public void setSupplierID(int SupplierID) {
-        this.SupplierID = SupplierID;
-    }
-
-    public int getSupplierID() {
-        return SupplierID;
     }
 }

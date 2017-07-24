@@ -2,8 +2,10 @@ package cn.edu.zucc.ding.summerterm.control;
 
 import cn.edu.zucc.ding.summerterm.Icontrol.IProductionControl;
 import cn.edu.zucc.ding.summerterm.model.Production;
+import cn.edu.zucc.ding.summerterm.model.Productiontype;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductionControl implements IProductionControl {
+    public List<Production> loadSomeProduction(Productiontype pt){
+        List<Production> result = new ArrayList<Production>();
+        String sql = DatabaseOP.select("*","production","where productiontypeid="+pt.getID());
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                Production p = new Production(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDouble(3),
+                    rs.getInt(4)
+                );
+                result.add(p);
+            };
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     @Override
     public List<Production> loadAllProduction() {
         List<Production> productions = new ArrayList<Production>();

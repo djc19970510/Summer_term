@@ -7,16 +7,27 @@ public class Materials implements getID {
     private String Name;
     private double MaterialsBasePrice;
     private String Introduction;
+    private int SupplierID;
 
     public Materials() {
     }
 
-    public Materials(int ID, String Name, double MaterialsBasePrice, String Introduction) {
+    public int getSupplierID() {
+        return SupplierID;
+    }
+
+    public void setSupplierID(int supplierID) {
+        SupplierID = supplierID;
+    }
+
+    public Materials(int ID, String Name, double MaterialsBasePrice, String Introduction, int SupplierID) {
         this();
         this.ID = ID;
         this.Name = Name;
         this.MaterialsBasePrice = MaterialsBasePrice;
         this.Introduction = Introduction;
+        this.SupplierID = SupplierID;
+
     }
 
     public void setID(int ID) {

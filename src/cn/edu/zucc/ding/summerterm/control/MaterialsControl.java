@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialsControl implements IMaterialsControl {
+
     @Override
     public List<Materials> loadAllMaterials() {
         List<Materials> result = null;
@@ -28,7 +29,8 @@ public class MaterialsControl implements IMaterialsControl {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getDouble(3),
-                        rs.getString(4)
+                        rs.getString(4),
+                        rs.getInt(5)
                 );
                 result.add(s);
             }
@@ -47,6 +49,7 @@ public class MaterialsControl implements IMaterialsControl {
             pst.setString(1,materials.getName());
             pst.setDouble(2,materials.getMaterialsBasePrice());
             pst.setString(3,materials.getIntroduction());
+            pst.setInt(4,materials.getSupplierID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,6 +65,7 @@ public class MaterialsControl implements IMaterialsControl {
             pst.setString(1,materials.getName());
             pst.setDouble(2,materials.getMaterialsBasePrice());
             pst.setString(3,materials.getIntroduction());
+            pst.setInt(4,materials.getSupplierID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
