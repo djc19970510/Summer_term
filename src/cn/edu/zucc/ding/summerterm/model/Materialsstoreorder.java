@@ -3,53 +3,61 @@ package cn.edu.zucc.ding.summerterm.model;
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Materialsstoreorder implements getID {
     private int ID;
     private double Number;
-    private Date Date;
+    private Timestamp Date;
     private int MaterialsID;
+    private int OrderID;
 
-    public Materialsstoreorder() {
-    }
-
-    public Materialsstoreorder(int ID, double Number, Date Date, int MaterialsID) {
-        this();
-        this.ID = ID;
-        this.Number = Number;
-        this.Date = Date;
-        this.MaterialsID = MaterialsID;
+    @Override
+    public int getID() {
+        return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setNumber(double Number) {
-        this.Number = Number;
-    }
-
     public double getNumber() {
         return Number;
     }
 
-    public void setDate(Date Date) {
-        this.Date = Date;
+    public void setNumber(double number) {
+        Number = number;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return Date;
     }
 
-    public void setMaterialsID(int MaterialsID) {
-        this.MaterialsID = MaterialsID;
+    public void setDate(Timestamp date) {
+        Date = date;
     }
 
     public int getMaterialsID() {
         return MaterialsID;
+    }
+
+    public void setMaterialsID(int materialsID) {
+        MaterialsID = materialsID;
+    }
+
+    public int getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(int orderID) {
+        OrderID = orderID;
+    }
+
+    public Materialsstoreorder(int ID, double number, Timestamp date, int materialsID, int orderID) {
+        this.ID = ID;
+        Number = number;
+        Date = date;
+        MaterialsID = materialsID;
+        OrderID = orderID;
     }
 }

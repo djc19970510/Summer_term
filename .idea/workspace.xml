@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="468cc367-d942-48d2-9a8c-532f8f8d9314" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/MaterialsAndStore.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/OrderAndProduction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/ProductionAndStore.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore_addm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore_addp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_42_bin.xml" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_42_bin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreControl.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/OtherControl.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/OtherControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstore.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productingorder.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productingorder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java" afterPath="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,84 +19,143 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="FrmProducting_add.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="90" column="33" lean-forward="false" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#747#759#0" expanded="true" />
+                <element signature="e#4763#4782#0" expanded="true" />
+                <marker date="1500969790296" expanded="true" signature="2771:2856" ph="select id fr... productingorder" />
+                <marker date="1500969790296" expanded="true" signature="3911:4064" ph="SELECT Mater... productiondetails" />
+                <marker date="1500969790296" expanded="true" signature="4866:4917" ph="select * fro... productionstore" />
+                <marker date="1500969790296" expanded="true" signature="5534:5595" ph="update mater... " />
+                <marker date="1500969790296" expanded="true" signature="6119:6168" ph="select * fro... productionstore" />
+                <marker date="1500969790296" expanded="true" signature="6378:6439" ph="update produ... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductingOrderControl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrmOrder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmOrder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FrmProducting.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="783">
+            <state relative-caret-position="523">
               <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrmProducting_add.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java">
+      <file leaf-file-name="MaterialsStoreOrderControl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="63" column="110" lean-forward="false" selection-start-line="63" selection-start-column="93" selection-end-line="63" selection-end-column="110" />
+            <state relative-caret-position="210">
+              <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductionStoreOrderControl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="66" column="60" lean-forward="false" selection-start-line="66" selection-start-column="60" selection-end-line="66" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Materialsstore.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Materialsstoreorder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-780">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#790#802#0" expanded="true" />
+                <element signature="e#365#366#0" expanded="true" />
+                <element signature="e#390#391#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#451#452#0" expanded="true" />
+                <element signature="e#484#485#0" expanded="true" />
+                <element signature="e#513#514#0" expanded="true" />
+                <element signature="e#557#558#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#622#623#0" expanded="true" />
+                <element signature="e#649#650#0" expanded="true" />
+                <element signature="e#692#693#0" expanded="true" />
+                <element signature="e#719#720#0" expanded="true" />
+                <element signature="e#754#755#0" expanded="true" />
+                <element signature="e#788#789#0" expanded="true" />
+                <element signature="e#839#840#0" expanded="true" />
+                <element signature="e#880#881#0" expanded="true" />
+                <element signature="e#911#912#0" expanded="true" />
+                <element signature="e#941#942#0" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
+                <element signature="e#1017#1018#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FrmStore_addp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore_addp.java">
+      <file leaf-file-name="Productionstoreorder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="66" column="30" lean-forward="true" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
+            <state relative-caret-position="108">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1051#1063#0" expanded="true" />
-                <marker date="1500956574684" expanded="true" signature="2350:2407" ph="select * fro... productionstore" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderAndProduction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/OrderAndProduction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="38" column="5" lean-forward="false" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OtherControl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/OtherControl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2241">
-              <caret line="34" column="22" lean-forward="false" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#508#528#0" expanded="true" />
-                <element signature="method#loadSomeMaterialsAndDetails#0;class#OtherControl#0" expanded="false" />
-                <element signature="method#loadSomeMaterialsAndSupplier#0;class#OtherControl#0" expanded="false" />
-                <element signature="e#3575#3595#0" expanded="true" />
-                <element signature="e#4562#4582#0" expanded="true" />
-                <element signature="e#5633#5652#0" expanded="true" />
-                <element signature="e#6813#6832#0" expanded="true" />
-                <marker date="1500959510982" expanded="true" signature="554:698" ph="SELECT produ... " />
-                <marker date="1500959510982" expanded="true" signature="2583:2759" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="3621:3760" ph="SELECT produ... production" />
-                <marker date="1500959510982" expanded="true" signature="3621:3761" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="4608:4747" ph="SELECT produ... production" />
-                <marker date="1500959510982" expanded="true" signature="4608:4804" ph="SELECT produ... production" />
-                <marker date="1500959510982" expanded="true" signature="5678:5939" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="5678:5940" ph="SELECT mater... materialsstore" />
-                <marker date="1500959510982" expanded="true" signature="6858:6890" ph="SELECT mater... materialsstore" />
-                <marker date="1500959510982" expanded="true" signature="6858:7119" ph="SELECT mater... materialsstore" />
-                <marker date="1500959510982" expanded="true" signature="6858:7225" ph="SELECT mater... materialsstore" />
-                <marker date="1500959510982" expanded="true" signature="8256:8436" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="8256:8580" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="8256:8587" ph="select mater... materials" />
-                <marker date="1500959510982" expanded="true" signature="8256:8588" ph="select mater... materials" />
+                <element signature="e#367#368#0" expanded="true" />
+                <element signature="e#392#393#0" expanded="true" />
+                <element signature="e#425#426#0" expanded="true" />
+                <element signature="e#453#454#0" expanded="true" />
+                <element signature="e#489#490#0" expanded="true" />
+                <element signature="e#524#525#0" expanded="true" />
+                <element signature="e#577#578#0" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#653#654#0" expanded="true" />
+                <element signature="e#682#683#0" expanded="true" />
+                <element signature="e#726#727#0" expanded="true" />
+                <element signature="e#757#758#0" expanded="true" />
+                <element signature="e#791#792#0" expanded="true" />
+                <element signature="e#818#819#0" expanded="true" />
+                <element signature="e#861#862#0" expanded="true" />
+                <element signature="e#888#889#0" expanded="true" />
+                <element signature="e#919#920#0" expanded="true" />
+                <element signature="e#949#950#0" expanded="true" />
+                <element signature="e#992#993#0" expanded="true" />
+                <element signature="e#1025#1026#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,8 +164,8 @@
       <file leaf-file-name="Productingorder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productingorder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="766">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="235">
+              <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -169,13 +220,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/IProductiontypeControlControl.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionorder.java" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstore.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreControl.java" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionOrderControl.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/TestSystem.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProduction_Type_add.java" />
@@ -216,8 +262,13 @@
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/OtherControl.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java" />
         <option value="$PROJECT_DIR$/lib/SwingDate.jar!/hong/yelinggu/date/absinterface/SelectHYDateAbstract.class" />
-        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java" />
         <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productingorder.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java" />
+        <option value="$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java" />
       </list>
     </option>
   </component>
@@ -279,6 +330,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="summerterm" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Summer_term" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Summer_term" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="summerterm" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -804,12 +862,12 @@
       <workItem from="1500597725740" duration="26451000" />
       <workItem from="1500771829193" duration="12998000" />
       <workItem from="1500799299484" duration="32687000" />
-      <workItem from="1500884365433" duration="27517000" />
+      <workItem from="1500884365433" duration="32086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154311000" />
+    <option name="totallyTimeSpent" value="158880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -863,54 +921,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionOrderControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="19" column="61" lean-forward="false" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
-          <folding>
-            <element signature="e#646#663#0" expanded="false" />
-            <element signature="method#modifyProductionorder#0;class#ProductionOrderControl#0" expanded="false" />
-            <element signature="method#addProductionorder#0;class#ProductionOrderControl#0" expanded="false" />
-            <element signature="method#delProductionorder#0;class#ProductionOrderControl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/TestSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <marker date="1500795970429" expanded="true" signature="345:418" ph="insert into materials... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/EntityMysql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="124" column="53" lean-forward="false" selection-start-line="124" selection-start-column="45" selection-end-line="124" selection-end-column="53" />
-          <folding>
-            <marker date="1500514386667" expanded="true" signature="1196:1210" ph="select * fro... missingValue" />
-            <marker date="1500514386667" expanded="true" signature="1196:1214" ph="select * fro... customer" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="19" column="77" lean-forward="false" selection-start-line="19" selection-start-column="77" selection-end-line="19" selection-end-column="77" />
-          <folding>
-            <element signature="e#716#728#0" expanded="false" />
-            <element signature="method#loadAllProduction#0;class#ProductionControl#0" expanded="false" />
-            <element signature="method#modifyProduction#0;class#ProductionControl#0" expanded="false" />
-            <element signature="method#addProduction#0;class#ProductionControl#0" expanded="false" />
-            <element signature="method#delProduction#0;class#ProductionControl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionTypeControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-920">
@@ -1087,14 +1097,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmCustomer_Add.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="29" column="26" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="29" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Supplier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1241,22 +1243,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="12" column="11" lean-forward="false" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmSupplier_Add.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -1269,14 +1255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
           <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -1367,31 +1345,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/sql/Timestamp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
           <caret line="71" column="13" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore_addp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="66" column="30" lean-forward="true" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1051#1063#0" expanded="true" />
-            <marker date="1500956574684" expanded="true" signature="2350:2407" ph="select * fro... productionstore" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1405,21 +1363,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmStore_addp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="68" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1051#1063#0" expanded="true" />
+            <marker date="1500956574684" expanded="true" signature="2350:2407" ph="select * fro... productionstore" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmCustomer_Add.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="55" column="63" lean-forward="false" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productingorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state relative-caret-position="235">
+          <caret line="16" column="11" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstoreorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-780">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#365#366#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#622#623#0" expanded="true" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#719#720#0" expanded="true" />
+            <element signature="e#754#755#0" expanded="true" />
+            <element signature="e#788#789#0" expanded="true" />
+            <element signature="e#839#840#0" expanded="true" />
+            <element signature="e#880#881#0" expanded="true" />
+            <element signature="e#911#912#0" expanded="true" />
+            <element signature="e#941#942#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1017#1018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Productionstoreorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#367#368#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+            <element signature="e#425#426#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+            <element signature="e#489#490#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#577#578#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#653#654#0" expanded="true" />
+            <element signature="e#682#683#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+            <element signature="e#757#758#0" expanded="true" />
+            <element signature="e#791#792#0" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#861#862#0" expanded="true" />
+            <element signature="e#888#889#0" expanded="true" />
+            <element signature="e#919#920#0" expanded="true" />
+            <element signature="e#949#950#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+            <element signature="e#1025#1026#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductionStoreOrderControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="66" column="60" lean-forward="false" selection-start-line="66" selection-start-column="60" selection-end-line="66" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/MaterialsStoreOrderControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/model/Materialsstore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/control/ProductingOrderControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/edu/zucc/ding/summerterm/ui/FrmProducting_add.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="63" column="110" lean-forward="false" selection-start-line="63" selection-start-column="93" selection-end-line="63" selection-end-column="110" />
+        <state relative-caret-position="185">
+          <caret line="90" column="33" lean-forward="false" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#790#802#0" expanded="true" />
+            <element signature="e#747#759#0" expanded="true" />
+            <element signature="e#4763#4782#0" expanded="true" />
+            <marker date="1500969790296" expanded="true" signature="2771:2856" ph="select id fr... productingorder" />
+            <marker date="1500969790296" expanded="true" signature="3911:4064" ph="SELECT Mater... productiondetails" />
+            <marker date="1500969790296" expanded="true" signature="4866:4917" ph="select * fro... productionstore" />
+            <marker date="1500969790296" expanded="true" signature="5534:5595" ph="update mater... " />
+            <marker date="1500969790296" expanded="true" signature="6119:6168" ph="select * fro... productionstore" />
+            <marker date="1500969790296" expanded="true" signature="6378:6439" ph="update produ... " />
           </folding>
         </state>
       </provider>

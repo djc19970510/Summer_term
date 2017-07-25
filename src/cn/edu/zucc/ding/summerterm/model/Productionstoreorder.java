@@ -3,53 +3,61 @@ package cn.edu.zucc.ding.summerterm.model;
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Productionstoreorder implements getID {
     private int ID;
     private int ProductionID;
     private double Number;
-    private Date Date;
+    private Timestamp Date;
+    private int OrderID;
 
-    public Productionstoreorder() {
-    }
-
-    public Productionstoreorder(int ID, int ProductionID, double Number, Date Date) {
-        this();
-        this.ID = ID;
-        this.ProductionID = ProductionID;
-        this.Number = Number;
-        this.Date = Date;
+    @Override
+    public int getID() {
+        return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setProductionID(int ProductionID) {
-        this.ProductionID = ProductionID;
-    }
-
     public int getProductionID() {
         return ProductionID;
     }
 
-    public void setNumber(double Number) {
-        this.Number = Number;
+    public void setProductionID(int productionID) {
+        ProductionID = productionID;
     }
 
     public double getNumber() {
         return Number;
     }
 
-    public void setDate(Date Date) {
-        this.Date = Date;
+    public void setNumber(double number) {
+        Number = number;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return Date;
+    }
+
+    public void setDate(Timestamp date) {
+        Date = date;
+    }
+
+    public int getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(int orderID) {
+        OrderID = orderID;
+    }
+
+    public Productionstoreorder(int ID, int productionID, double number, Timestamp date, int orderID) {
+        this.ID = ID;
+        ProductionID = productionID;
+        Number = number;
+        Date = date;
+        OrderID = orderID;
     }
 }

@@ -24,8 +24,9 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
                 Materialsstoreorder s = new Materialsstoreorder(
                         rs.getInt(1),
                         rs.getDouble(2),
-                        rs.getDate(3),
-                        rs.getInt(4)
+                        rs.getTimestamp(3),
+                        rs.getInt(4),
+                        rs.getInt(5)
                 );
                 result.add(s);
             }
@@ -42,8 +43,9 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst =conn.prepareStatement(sql);
             pst.setDouble(1,materialsstoreorder.getNumber());
-            pst.setDate(2, materialsstoreorder.getDate());
+            pst.setTimestamp(2, materialsstoreorder.getDate());
             pst.setInt(3,materialsstoreorder.getMaterialsID());
+            pst.setInt(4,materialsstoreorder.getOrderID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,8 +59,9 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst =conn.prepareStatement(sql);
             pst.setDouble(1,materialsstoreorder.getNumber());
-            pst.setDate(2, materialsstoreorder.getDate());
+            pst.setTimestamp(2, materialsstoreorder.getDate());
             pst.setInt(3,materialsstoreorder.getMaterialsID());
+            pst.setInt(4,materialsstoreorder.getOrderID());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
