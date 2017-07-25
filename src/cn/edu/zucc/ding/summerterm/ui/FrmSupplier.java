@@ -19,7 +19,7 @@ public class FrmSupplier extends JPanel implements ActionListener {
     private JButton Supplier_mod = new JButton("修改");
     private JButton Supplier_sel = new JButton("查询");
     private JTextField Supplier_selectText = new JTextField(15);
-    private Object tblTitle[] = {"供应商ID", "供应商姓名", "供应商地址", "供应商描述", "联系人姓名", "联系人电话"};
+    private Object tblTitle[] = {"供应商序号", "供应商姓名", "供应商地址", "供应商描述", "联系人姓名", "联系人电话"};
     private Object tblData[][];
     DefaultTableModel tablmod = new DefaultTableModel();
     List<Supplier> suppliers;
@@ -38,6 +38,8 @@ public class FrmSupplier extends JPanel implements ActionListener {
 
         Supplier_add.addActionListener(this);
         Supplier_mod.addActionListener(this);
+        Supplier_del.addActionListener(this);
+        Supplier_sel.addActionListener(this);
 
         this.add(task, BorderLayout.SOUTH);
         task.setBackground(new Color(77, 77, 77));
@@ -48,14 +50,17 @@ public class FrmSupplier extends JPanel implements ActionListener {
         this.setVisible(true);
         task.add(Supplier_sel);
         this.setBackground(new Color(0, 255, 255));
-        this.reloadTable();
+        this.reloadTable(null);
     }
 
-    protected void reloadTable() {
-        suppliers = (new SupplierControl()).loadAllSupplier();
+    protected void reloadTable(String s) {
+        if(s==null)
+            suppliers = (new SupplierControl()).loadAllSupplier();
+        else
+            suppliers = (new SupplierControl()).loadSomeSupplier(s);
         tblData = new Object[suppliers.size()][6];
         for (int i = 0; i < suppliers.size(); i++) {
-            tblData[i][0] = suppliers.get(i).getID() + "";
+            tblData[i][0] = i+1 + "";
             tblData[i][1] = suppliers.get(i).getName();
             tblData[i][2] = suppliers.get(i).getAddress();
             tblData[i][4] = suppliers.get(i).getLinkName();
@@ -73,9 +78,17 @@ public class FrmSupplier extends JPanel implements ActionListener {
             FrmSupplier_Add dlg = new FrmSupplier_Add(this);
             dlg.setVisible(true);
         } else if (e.getSource() == this.Supplier_del) {
-
+            int sr = this.Supplier_infotable.getSelectedRow();
+            if(sr<0){
+                JOptionPane.showMessageDialog(null,  "请选择要删除的供应商","提示",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            SupplierControl sc = new SupplierControl();
+            sc.delSupplier(suppliers.get(sr));
+            this.reloadTable(null);
         } else if (e.getSource() == this.Supplier_sel) {
-
+            String s = this.Supplier_selectText.getText();
+            this.reloadTable(s);
         } else if (e.getSource() == this.Supplier_mod) {
             int i=this.Supplier_infotable.getSelectedRow();
             if(i<0){

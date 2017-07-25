@@ -70,7 +70,7 @@ public class FrmSupplier_Add extends JDialog implements ActionListener {
             );
             (new SupplierControl()).addSupplier(s);
             this.setVisible(false);
-            this.t.reloadTable();
+            this.t.reloadTable(null);
             this.removeAll();
         }else if(e.getSource()==this.Add_Cancel){
             this.setVisible(false);

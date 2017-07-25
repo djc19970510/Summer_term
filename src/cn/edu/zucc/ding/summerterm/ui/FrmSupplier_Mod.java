@@ -72,7 +72,7 @@ public class FrmSupplier_Mod extends JDialog implements ActionListener {
             this.s.setLinkPhone(this.LinkPhoneT.getText());
             (new SupplierControl()).modifySupplier(s);
             this.setVisible(false);
-            this.t.reloadTable();
+            this.t.reloadTable(null);
             System.out.println("OK");
             this.removeAll();
         }else if(e.getSource()==this.Mod_Cancel){

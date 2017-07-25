@@ -66,7 +66,7 @@ public class FrmCustomer_Mod extends JDialog implements ActionListener{
             this.c.setLinkPhone(this.LinkPhoneT.getText());
             (new CustomerControl()).modifyCustomer(c);
             this.setVisible(false);
-            this.t.reloadTable();
+            this.t.reloadTable(null);
             this.removeAll();
         }else if(e.getSource()==this.Mod_Cancel){
             this.setVisible(false);

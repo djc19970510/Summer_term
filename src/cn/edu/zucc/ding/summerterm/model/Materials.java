@@ -9,8 +9,7 @@ public class Materials implements getID {
     private String Introduction;
     private int SupplierID;
 
-    public Materials() {
-    }
+    public Materials() {}
 
     public int getSupplierID() {
         return SupplierID;

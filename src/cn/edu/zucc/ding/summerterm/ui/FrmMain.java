@@ -1,8 +1,6 @@
 package cn.edu.zucc.ding.summerterm.ui;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,7 @@ public class FrmMain extends JFrame implements ActionListener{
     private JButton menu_Store=new JButton("仓库管理");
     private JButton menu_Order=new JButton("订单管理");
     private JButton menu_Producting=new JButton("生产管理");
-    private JButton menu_Linkman=new JButton("联系人管理");
+    private JButton menu_Linkman=new JButton("材料管理");
 
 
 
@@ -29,6 +27,8 @@ public class FrmMain extends JFrame implements ActionListener{
         menu_Supplier.setBackground(this.getBackground());
         menubar.add(menu_Production);
         menu_Production.addActionListener(this);
+        menubar.add(menu_Linkman);
+        menu_Linkman.addActionListener(this);
         menubar.add(menu_Supplier);
         menu_Supplier.addActionListener(this);
         menubar.add(menu_Customer);
@@ -39,8 +39,6 @@ public class FrmMain extends JFrame implements ActionListener{
         menu_Order.addActionListener(this);
         menubar.add(menu_Producting);
         menu_Producting.addActionListener(this);
-        menubar.add(menu_Linkman);
-        menu_Linkman.addActionListener(this);
 
         this.getContentPane().add(menubar,BorderLayout.NORTH);
         this.getContentPane().add(centerPanel,BorderLayout.CENTER);
@@ -70,7 +68,7 @@ public class FrmMain extends JFrame implements ActionListener{
         }else if (e.getSource()==this.menu_Customer){
             tmp=new FrmCustomer();
         }else if (e.getSource()==this.menu_Linkman){
-            tmp=new FrmLinkman();
+            tmp=new FrmMaterials();
         }else if (e.getSource()==this.menu_Order){
             tmp=new FrmOrder();
         }else if (e.getSource()==this.menu_Producting){

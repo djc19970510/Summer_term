@@ -10,8 +10,7 @@ public class Supplier implements getID {
     private String Introduction;
     private String LinkPhone;
 
-    public Supplier() {
-    }
+    public Supplier() {}
 
     public Supplier(int ID, String Name, String Address, String LinkName, String Introduction, String LinkPhone) {
         this();

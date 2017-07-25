@@ -65,7 +65,7 @@ public class FrmCustomer_Add extends JDialog implements ActionListener {
             );
             (new CustomerControl()).addCustomer(c);
             this.setVisible(false);
-            this.t.reloadTable();
+            this.t.reloadTable(null);
             this.removeAll();
         }else if(e.getSource()==this.Add_Cancel){
             this.setVisible(false);

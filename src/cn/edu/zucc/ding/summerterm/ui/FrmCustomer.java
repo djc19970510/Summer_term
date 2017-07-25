@@ -20,7 +20,7 @@ public class FrmCustomer extends JPanel implements ActionListener{
     private JButton Customer_mod = new JButton("修改");
     private JButton Customer_sel = new JButton("查询");
     private JTextField Customer_selectText = new JTextField(15);
-    private Object tblTitle[] = {"客户ID", "客户姓名", "客户地址", "联系人姓名", "联系人电话"};
+    private Object tblTitle[] = {"客户序号", "客户姓名", "客户地址", "联系人姓名", "联系人电话"};
     private Object tblData[][];
     DefaultTableModel tablmod = new DefaultTableModel();
     List<Customer> customers;
@@ -38,6 +38,8 @@ public class FrmCustomer extends JPanel implements ActionListener{
 
         Customer_add.addActionListener(this);
         Customer_mod.addActionListener(this);
+        Customer_del.addActionListener(this);
+        Customer_sel.addActionListener(this);
 
         this.add(task, BorderLayout.SOUTH);
         task.setBackground(new Color(77, 77, 77));
@@ -48,14 +50,17 @@ public class FrmCustomer extends JPanel implements ActionListener{
         this.setVisible(true);
         task.add(Customer_sel);
         this.setBackground(new Color(0, 255, 255));
-        this.reloadTable();
+        this.reloadTable(null);
     }
 
-    protected void reloadTable() {
-        customers = (new CustomerControl()).loadAllCustomer();
+    protected void reloadTable(String s) {
+        if(s==null)
+            customers = (new CustomerControl()).loadAllCustomer();
+        else
+            customers = (new CustomerControl()).loadSomeCustomer(s);
         tblData = new Object[customers.size()][5];
         for (int i = 0; i < customers.size(); i++) {
-            tblData[i][0] = customers.get(i).getID() + "";
+            tblData[i][0] = i+1 + "";
             tblData[i][1] = customers.get(i).getName();
             tblData[i][2] = customers.get(i).getAddress();
             tblData[i][3] = customers.get(i).getLinkName();
@@ -71,9 +76,16 @@ public class FrmCustomer extends JPanel implements ActionListener{
             FrmCustomer_Add dlg = new FrmCustomer_Add(this);
             dlg.setVisible(true);
         } else if (e.getSource() == this.Customer_del) {
-
+            int i=this.Customer_infotable.getSelectedRow();
+            if(i<0){
+                JOptionPane.showMessageDialog(null,  "请选择删除的客户","提示",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Customer cu = this.customers.get(i);
+            (new CustomerControl()).delCustomer(cu);
         } else if (e.getSource() == this.Customer_sel) {
-
+            String s = this.Customer_selectText.getText();
+            this.reloadTable(s);
         } else if (e.getSource() == this.Customer_mod) {
             int i=this.Customer_infotable.getSelectedRow();
             if(i<0){

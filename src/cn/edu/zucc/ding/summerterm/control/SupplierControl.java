@@ -14,6 +14,39 @@ import java.util.List;
 
 public class SupplierControl implements ISupplierControl {
 
+    public List<Supplier> loadSomeSupplier(String phrase){
+        phrase = "%"+phrase+"%";
+        List<Supplier> result = null;
+        String sql = DatabaseOP.select("*","Supplier",
+                "where Name like ? or Address like ? or LinkName like ?" +
+                        " or Introduction like ? or LinkPhone like ?");
+        Connection conn = null;
+        try {
+            conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,phrase);
+            pst.setString(2,phrase);
+            pst.setString(3,phrase);
+            pst.setString(4,phrase);
+            pst.setString(5,phrase);
+            ResultSet rs = pst.executeQuery();
+            result = new ArrayList<Supplier>();
+            while(rs.next()){
+                Supplier s = new Supplier(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                );
+                result.add(s);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     @Override
     public List<Supplier> loadAllSupplier() {

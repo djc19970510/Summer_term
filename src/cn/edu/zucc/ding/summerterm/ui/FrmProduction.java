@@ -75,7 +75,7 @@ public class FrmProduction extends JPanel implements ActionListener {
         this.add(maintask,BorderLayout.CENTER);
         this.setVisible(true);
 
-        maintask.setBackground(new Color(5,5,5));
+
         maintask.setVisible(true);
         maintask.setLayout(new BorderLayout());
 
@@ -85,7 +85,6 @@ public class FrmProduction extends JPanel implements ActionListener {
         //左侧任务栏
         main_left_task.setVisible(true);
         main_left_task.setPreferredSize(new Dimension(350,200));
-        main_left_task.setBackground(new Color(222,222,22));
         main_left_task.setLayout(new BorderLayout());
         main_left_task.add(main_left_top_task,BorderLayout.NORTH);
         main_left_task.add(main_left_center_task,BorderLayout.CENTER);
@@ -104,13 +103,11 @@ public class FrmProduction extends JPanel implements ActionListener {
             this.mod_Type.addActionListener(this);
             this.del_Type.addActionListener(this);
             this.sel_Type.addActionListener(this);
-            main_left_center_task.setBackground(new Color(44,44,233));
             main_left_center_task.setPreferredSize(new Dimension(300,100));
 
 
 
         //中部任务栏
-        main_center_task.setBackground(new Color(222,77,22));
         main_center_task.setLayout(new BorderLayout());
         main_center_task.add(main_center_top_task,BorderLayout.NORTH);
         main_center_task.add(main_center_center_task,BorderLayout.CENTER);
@@ -123,14 +120,12 @@ public class FrmProduction extends JPanel implements ActionListener {
             this.mod_pro.addActionListener(this);
             this.del_pro.addActionListener(this);
             //中部中部任务栏
-            main_center_center_task.setBackground(new Color(122,33,240));
             main_center_center_task.setLayout(new BorderLayout());
             main_center_center_task.add(table_scrollproduction,BorderLayout.CENTER);
             table_production.addMouseListener(new myMouseAdapterPro(this));
 
         //右侧任务栏
         main_right_task.setVisible(true);
-        main_right_task.setBackground(new Color(222,0,0));
 //        main_right_task.setPreferredSize(new Dimension(400,1));
         main_right_task.setLayout(new BorderLayout());
             //右侧中部任务栏
@@ -290,7 +285,24 @@ public class FrmProduction extends JPanel implements ActionListener {
             MaterialsAndDetails prod = productiondetails.get(sr);
             FrmProduction_details dlg = new FrmProduction_details(this,prod);
         }else if(e.getSource()==this.del_detail){
-
+            int sr = this.table_productiondetails.getSelectedRow();
+            if(sr<0){
+                JOptionPane.showMessageDialog(null,  "请先选择产品详细信息","提示",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            MaterialsAndDetails prod = productiondetails.get(sr);
+            String sql = "delete from productiondetails where productionid=? and materialsid=?";
+            try {
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement pst=conn.prepareStatement(sql);
+                pst.setInt(1,prod.getProductionID());
+                pst.setInt(2,prod.getMaterialsID());
+                pst.execute();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            int srp = table_production.getSelectedRow();
+            this.reloadAllDetails(productions.get(srp));
         }
     }
 
