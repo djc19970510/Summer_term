@@ -1,14 +1,14 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-import cn.edu.zucc.ding.summerterm.Icontrol.getID;
-
-public class Materialsstore implements getID {
+public class MaterialsAndStore {
     private int ID;
     private double Number;
     private String Address;
     private int MaterialsID;
+    private String Name;
+    private int SupplierID;
+    private String SupplierName;
 
-    @Override
     public int getID() {
         return ID;
     }
@@ -41,11 +41,37 @@ public class Materialsstore implements getID {
         MaterialsID = materialsID;
     }
 
-    public Materialsstore(int ID, double number, String address, int materialsID) {
+    public String getName() {
+        return Name;
+    }
 
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public int getSupplierID() {
+        return SupplierID;
+    }
+
+    public void setSupplierID(int supplierID) {
+        SupplierID = supplierID;
+    }
+
+    public String getSupplierName() {
+        return SupplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        SupplierName = supplierName;
+    }
+
+    public MaterialsAndStore(int ID, double number, String address, int materialsID, String name, int supplierID, String supplierName) {
         this.ID = ID;
         Number = number;
         Address = address;
         MaterialsID = materialsID;
+        Name = name;
+        SupplierID = supplierID;
+        SupplierName = supplierName;
     }
 }

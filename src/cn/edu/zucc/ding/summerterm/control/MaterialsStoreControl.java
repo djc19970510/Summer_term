@@ -46,7 +46,7 @@ public class MaterialsStoreControl implements IMaterialsstoreControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst =conn.prepareStatement(sql);
             pst.setDouble(1,materialsstore.getNumber());
-            pst.setString(2,materialsstore.getAdd());
+            pst.setString(2,materialsstore.getAddress());
             pst.setInt(3,materialsstore.getMaterialsID());
             pst.execute();
         } catch (SQLException e) {
@@ -61,7 +61,7 @@ public class MaterialsStoreControl implements IMaterialsstoreControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst =conn.prepareStatement(sql);
             pst.setDouble(1,materialsstore.getNumber());
-            pst.setString(2,materialsstore.getAdd());
+            pst.setString(2,materialsstore.getAddress());
             pst.setInt(3,materialsstore.getMaterialsID());
             pst.execute();
         } catch (SQLException e) {

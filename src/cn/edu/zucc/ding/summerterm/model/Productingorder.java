@@ -3,17 +3,18 @@ package cn.edu.zucc.ding.summerterm.model;
 import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Productingorder implements getID {
     private int ID;
     private int ProductionID;
     private double ProductionNumber;
-    private Date date;
+    private Timestamp date;
 
     public Productingorder() {
     }
 
-    public Productingorder(int ID, int ProductionID, double ProductionNumber, Date date) {
+    public Productingorder(int ID, int ProductionID, double ProductionNumber, Timestamp date) {
         this();
         this.ID = ID;
         this.ProductionID = ProductionID;
@@ -45,11 +46,11 @@ public class Productingorder implements getID {
         return ProductionNumber;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
