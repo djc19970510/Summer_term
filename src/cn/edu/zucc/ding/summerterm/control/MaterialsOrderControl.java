@@ -24,13 +24,13 @@ public class MaterialsOrderControl implements IMaterialsorderControl {
             ResultSet rs = pst.executeQuery();
             result = new ArrayList<Materialsorder>();
             while(rs.next()){
-                Materialsorder s = new Materialsorder(
-                        rs.getInt(1),
-                        rs.getDouble(2),
-                        rs.getDouble(3),
-                        rs.getInt(4)
-                );
-                result.add(s);
+//                Materialsorder s = new Materialsorder(
+//                        rs.getInt(1),
+//                        rs.getDouble(2),
+//                        rs.getDouble(3),
+//                        rs.getInt(4)
+//                );
+//                result.add(s);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,6 +62,7 @@ public class MaterialsOrderControl implements IMaterialsorderControl {
             pst.setDouble(1,materialsorder.getPrice());
             pst.setDouble(2,materialsorder.getNumber());
             pst.setInt(3,materialsorder.getMaterialsID());
+            pst.setTimestamp(4,materialsorder.getDate());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();

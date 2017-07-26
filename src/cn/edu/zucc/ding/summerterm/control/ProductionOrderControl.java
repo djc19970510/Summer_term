@@ -27,8 +27,9 @@ public class ProductionOrderControl implements IProductionorderControl {
                         rs.getInt(1),
                         rs.getDouble(2),
                         rs.getDouble(3),
-                        rs.getInt(4),
-                        rs.getInt(5)
+                        rs.getTimestamp(4),
+                        rs.getInt(5),
+                        rs.getInt(6)
                 );
                 result.add(p);
             }
@@ -47,7 +48,7 @@ public class ProductionOrderControl implements IProductionorderControl {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setDouble(1,productionorder.getPrice());
             pst.setDouble(2,productionorder.getNumber());
-            pst.setDate(3,productionorder.getDate());
+            pst.setTimestamp(3,productionorder.getDate());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +64,9 @@ public class ProductionOrderControl implements IProductionorderControl {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setDouble(1,productionorder.getPrice());
             pst.setDouble(2,productionorder.getNumber());
-            pst.setDate(3,productionorder.getDate());
+            pst.setTimestamp(3,productionorder.getDate());
+            pst.setInt(4,productionorder.getCustomerid());
+            pst.setInt(5,productionorder.getProductionid());
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -12,6 +12,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OtherControl {
+    public List<ProductionsAndOrder> loadAllProductionsAndOrder(){
+        List<ProductionsAndOrder> result = new ArrayList<ProductionsAndOrder>();
+        String sql = "SELECT productionorder.ID,productionorder.price,number,ProductionID,CustomerID," +
+                "Date,production.Name,customer.Name FROM productionorder,production,customer " +
+                "where productionorder.ProductionID=production.id and customer.id=productionorder.CustomerID;";
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                ProductionsAndOrder m = new ProductionsAndOrder(
+                    rs.getInt(1),
+                        rs.getDouble(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getTimestamp(6)
+                );
+                result.add(m);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<MaterialsAndOrder> loadAllMaterialsAndOrder(){
+        List<MaterialsAndOrder> result = new ArrayList<MaterialsAndOrder>();
+        String sql = "SELECT materialsorder.id as orderid,materials.name as materialsname," +
+                "materials.id as materialsid,materials.MaterialsBasePrice,supplierID,supplier.name,Date,materialsorder.Number " +
+                "FROM materials,materialsorder,supplier where materials.ID=materialsorder.MaterialsID " +
+                "And supplier.id=SupplierID;";
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                MaterialsAndOrder m = new MaterialsAndOrder(
+                        rs.getInt(1),
+                        rs.getDouble(4),
+                        rs.getDouble(8),
+                        rs.getInt(3),
+                        rs.getString(2),
+                        rs.getTimestamp(7),
+                        rs.getInt(5),
+                        rs.getString(6)
+                );
+                result.add(m);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public List<OrderAndProduction> loadAllProductingorder(){
         List<OrderAndProduction> result = new ArrayList<OrderAndProduction>();
         String sql = "SELECT productingorder.id,ProductionID,ProductionNumber,Date,name FROM productingorder,production where ProductionID=production.id order by Date";

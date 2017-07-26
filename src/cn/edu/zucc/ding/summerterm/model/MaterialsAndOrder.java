@@ -1,17 +1,17 @@
 package cn.edu.zucc.ding.summerterm.model;
 
-import cn.edu.zucc.ding.summerterm.Icontrol.getID;
-
 import java.sql.Timestamp;
 
-public class Materialsorder implements getID {
+public class MaterialsAndOrder {
     private int ID;
     private double Price;
     private double Number;
     private int MaterialsID;
+    private String MaterialsName;
     private Timestamp Date;
+    private int supplierID;
+    private String supplierName;
 
-    @Override
     public int getID() {
         return ID;
     }
@@ -44,6 +44,14 @@ public class Materialsorder implements getID {
         MaterialsID = materialsID;
     }
 
+    public String getMaterialsName() {
+        return MaterialsName;
+    }
+
+    public void setMaterialsName(String materialsName) {
+        MaterialsName = materialsName;
+    }
+
     public Timestamp getDate() {
         return Date;
     }
@@ -52,11 +60,30 @@ public class Materialsorder implements getID {
         Date = date;
     }
 
-    public Materialsorder(int ID, double price, double number, int materialsID, Timestamp date) {
+    public int getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(int supplierID) {
+        this.supplierID = supplierID;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public MaterialsAndOrder(int ID, double price, double number, int materialsID, String materialsName, Timestamp date, int supplierID, String supplierName) {
         this.ID = ID;
         Price = price;
         Number = number;
         MaterialsID = materialsID;
+        MaterialsName = materialsName;
         Date = date;
+        this.supplierID = supplierID;
+        this.supplierName = supplierName;
     }
 }

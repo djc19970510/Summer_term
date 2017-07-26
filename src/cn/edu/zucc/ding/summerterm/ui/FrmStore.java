@@ -22,7 +22,7 @@ public class FrmStore extends JPanel implements ActionListener{
             private JScrollPane Materials_infotableheader = new JScrollPane(Materials_infotable);
         private JPanel left_mid= new JPanel();
             private JButton Add_m = new JButton("增加");
-            private JButton Del_m = new JButton("删除");
+            private JButton Del_m = new JButton("修改");
             private JTextField sel_m_text = new JTextField(15);
             private JButton Sel_m = new JButton("查询");
     private JPanel right = new JPanel();
@@ -35,7 +35,7 @@ public class FrmStore extends JPanel implements ActionListener{
             private JScrollPane Productions_infotableheader = new JScrollPane(Productions_infotable);
         private JPanel right_mid= new JPanel();
             private JButton Add_p = new JButton("增加");
-            private JButton Del_p = new JButton("删除");
+            private JButton Del_p = new JButton("修改");
             private JTextField sel_p_text = new JTextField(15);
             private JButton Sel_p = new JButton("查询");
 
@@ -129,17 +129,19 @@ public class FrmStore extends JPanel implements ActionListener{
         }else if(e.getSource()==this.Del_m){
             int sr = Materials_infotable.getSelectedRow();
             if(sr<0){
-                JOptionPane.showMessageDialog(null,  "请选择要删除的材料仓库信息","提示",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,  "请选择要修改的材料仓库信息","提示",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             MaterialsAndStore ms = materialsAndStore.get(sr);
+            FrmStore_addm dlg = new FrmStore_addm(this,ms);
         }else if(e.getSource()==this.Del_p){
             int sr =Productions_infotable.getSelectedRow();
             if(sr<0){
-                JOptionPane.showMessageDialog(null,  "请选择要删除的材料仓库信息","提示",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,  "请选择要修改的产品仓库信息","提示",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            MaterialsAndStore ms = materialsAndStore.get(sr);
+            ProductionAndStore ms = ProductionAndStores.get(sr);
+            FrmStore_addp dlg = new FrmStore_addp(this,ms);
         }else if(e.getSource()==this.Add_m){
             FrmStore_addm dlg = new FrmStore_addm(this);
         }else if(e.getSource()==this.Add_p){

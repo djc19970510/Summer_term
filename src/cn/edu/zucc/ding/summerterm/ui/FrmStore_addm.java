@@ -3,8 +3,8 @@ package cn.edu.zucc.ding.summerterm.ui;
 import cn.edu.zucc.ding.summerterm.control.MaterialsControl;
 import cn.edu.zucc.ding.summerterm.control.MaterialsStoreControl;
 import cn.edu.zucc.ding.summerterm.model.Materials;
+import cn.edu.zucc.ding.summerterm.model.MaterialsAndStore;
 import cn.edu.zucc.ding.summerterm.model.Materialsstore;
-import cn.edu.zucc.ding.summerterm.model.Materialsstoreorder;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 
 import javax.swing.*;
@@ -29,6 +29,7 @@ public class FrmStore_addm extends JDialog implements ActionListener {
     private FrmStore fs;
     private List<Materials> materials = new ArrayList<Materials>();
     private String[] materialsString;
+    private MaterialsAndStore ms;
 
     public FrmStore_addm(FrmStore fs){
         this.fs = fs;
@@ -52,6 +53,34 @@ public class FrmStore_addm extends JDialog implements ActionListener {
         this.setVisible(true);
     }
 
+    public FrmStore_addm(FrmStore fs, MaterialsAndStore ms){
+        int j=0;
+        this.ms = ms;
+        this.fs = fs;
+        this.setSize(new Dimension(180,140));
+        materials = (new MaterialsControl()).loadAllMaterials();
+        materialsString = new String[materials.size()];
+        for(int i=0;i<materials.size();i++){
+            materialsString[i] = materials.get(i).getName();
+            if(this.ms.getName().equals(materialsString[i]))
+                j=i;
+        }
+        this.materbox = new JComboBox(materialsString);
+        this.materbox.setPreferredSize(new Dimension(110,20));
+        this.setLayout(new FlowLayout());
+        this.add(materialsL);
+        this.add(materbox);
+        this.materbox.setSelectedIndex(j);
+        this.add(addressL);
+        this.add(addressT);
+        this.addressT.setText(this.ms.getAddress());
+        this.add(Add_OK);
+        this.add(Add_Cancel);
+        this.Add_OK.addActionListener(this);
+        this.Add_Cancel.addActionListener(this);
+        this.setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.Add_Cancel){
@@ -66,16 +95,19 @@ public class FrmStore_addm extends JDialog implements ActionListener {
                 PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null,  "该材料已经存在仓库存储信息","提示",JOptionPane.ERROR_MESSAGE);
-                    return;
+                    Materialsstore ms = new Materialsstore(
+                            this.ms.getID(),this.ms.getNumber(),this.addressT.getText(),id
+                    );
+                    (new MaterialsStoreControl()).modifyMaterialsstore(ms);
+                }else{
+                    Materialsstore ms = new Materialsstore(
+                            0,0,this.addressT.getText(),id
+                    );
+                    (new MaterialsStoreControl()).addMaterialsstore(ms);
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-            Materialsstore ms = new Materialsstore(
-                    0,0,this.addressT.getText(),id
-            );
-            (new MaterialsStoreControl()).addMaterialsstore(ms);
             this.setVisible(false);
             this.removeAll();
             fs.reloadmTable(null);
