@@ -105,7 +105,9 @@ public class FrmStore_addp extends JDialog implements ActionListener {
                             0,0,this.addressT.getText(),id
                     );
                     (new ProductionStoreControl()).addProductionstore(ms);
-                }
+                }                rs.close();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

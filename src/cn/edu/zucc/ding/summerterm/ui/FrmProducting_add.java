@@ -79,7 +79,9 @@ public class FrmProducting_add extends JDialog implements ActionListener {
                         orderid = rs.getInt(1);
                         Materialsout(id,number,orderid,Timestamp.valueOf(this.timeT.getText()));
                         Productionin(id,number,orderid,Timestamp.valueOf(this.timeT.getText()));
-                    }
+                    }                rs.close();
+                    pst.close();
+                    conn.close();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -106,7 +108,9 @@ public class FrmProducting_add extends JDialog implements ActionListener {
                     JOptionPane.showMessageDialog(null, "库存不足", "提示", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
-            }
+            }                rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -134,7 +138,9 @@ public class FrmProducting_add extends JDialog implements ActionListener {
                 pst.setDouble(1,result.get(i).getMaterialsNumber()*number);
                 pst.setInt(2,result.get(i).getMaterialsID());
                 pst.execute();
-            }
+            }                rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -161,6 +167,9 @@ public class FrmProducting_add extends JDialog implements ActionListener {
             }else{
                 JOptionPane.showMessageDialog(null, "此产品无仓库", "提示", JOptionPane.ERROR_MESSAGE);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

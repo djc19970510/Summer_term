@@ -4,6 +4,8 @@ import cn.edu.zucc.ding.summerterm.control.ProductionControl;
 import cn.edu.zucc.ding.summerterm.control.ProductionTypeControl;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productiontype;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,6 +68,16 @@ public class FrmProduction_pro extends JDialog implements ActionListener{
             this.setVisible(false);
             this.removeAll();
         }else if(e.getSource()==this.Add_OK){
+            try {
+                if(this.NameT.getText().equals("")){
+                    throw new BaseException("未输入产品名称");
+                }else if(!DatabaseOP.isDouble(this.PriceT.getText())){
+                    throw new BaseException("产品价格不合法");
+                }
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             int i=type_chose.getSelectedIndex();
             Production p = new Production(
                 pro!=null?pro.getID():0,this.NameT.getText(),Double.valueOf(this.PriceT.getText()),tmp.get(i).getID()

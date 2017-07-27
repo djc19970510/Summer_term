@@ -59,7 +59,9 @@ public class FrmStore_orderm extends JDialog implements ActionListener{
                         rs.getString(5)
                 );
                 masol.add(maso);
-            }
+            }                rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

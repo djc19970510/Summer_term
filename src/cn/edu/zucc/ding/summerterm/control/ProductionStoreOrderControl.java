@@ -31,6 +31,9 @@ public class ProductionStoreOrderControl implements IProductionstoreorderControl
                 );
                 result.add(p);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,6 +52,8 @@ public class ProductionStoreOrderControl implements IProductionstoreorderControl
             pst.setTimestamp(3,productionstoreorder.getDate());
             pst.setInt(4,productionstoreorder.getOrderID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,6 +71,8 @@ public class ProductionStoreOrderControl implements IProductionstoreorderControl
             pst.setTimestamp(3,productionstoreorder.getDate());
             pst.setInt(4,productionstoreorder.getOrderID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,6 +85,8 @@ public class ProductionStoreOrderControl implements IProductionstoreorderControl
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

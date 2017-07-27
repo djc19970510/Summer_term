@@ -30,6 +30,9 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,6 +50,8 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
             pst.setInt(3,materialsstoreorder.getMaterialsID());
             pst.setInt(4,materialsstoreorder.getOrderID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +68,8 @@ public class MaterialsStoreOrderControl implements IMaterialsstoreorderControl {
             pst.setInt(3,materialsstoreorder.getMaterialsID());
             pst.setInt(4,materialsstoreorder.getOrderID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

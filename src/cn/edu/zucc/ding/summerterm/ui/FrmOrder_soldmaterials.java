@@ -123,6 +123,8 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
                 pst.setInt(2,p.getID());
                 System.out.println(p.getID());
                 pst.execute();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

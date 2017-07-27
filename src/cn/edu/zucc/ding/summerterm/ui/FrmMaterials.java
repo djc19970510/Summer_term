@@ -118,6 +118,9 @@ public class FrmMaterials extends JPanel implements ActionListener{
                 if(rs.next()){
                     throw new BaseException("无法删除，有产品使用此材料");
                 }
+                rs.close();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
                 try {

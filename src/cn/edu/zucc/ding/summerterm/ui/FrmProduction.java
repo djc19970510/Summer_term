@@ -254,7 +254,9 @@ public class FrmProduction extends JPanel implements ActionListener {
                     ProductionTypeControl ptc = new ProductionTypeControl();
                     ptc.delProductiontype(pt);
                     this.reloadAllType("");
-                }
+                }                rs.close();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
@@ -286,6 +288,8 @@ public class FrmProduction extends JPanel implements ActionListener {
                     pst = conn.prepareStatement(sql);
                     pst.setInt(1,pro.getID());
                     pst.execute();
+                    pst.close();
+                    conn.close();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -325,6 +329,8 @@ public class FrmProduction extends JPanel implements ActionListener {
                 pst.setInt(1,prod.getProductionID());
                 pst.setInt(2,prod.getMaterialsID());
                 pst.execute();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

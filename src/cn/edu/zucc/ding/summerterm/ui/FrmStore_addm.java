@@ -104,7 +104,9 @@ public class FrmStore_addm extends JDialog implements ActionListener {
                             0,0,this.addressT.getText(),id
                     );
                     (new MaterialsStoreControl()).addMaterialsstore(ms);
-                }
+                }                rs.close();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

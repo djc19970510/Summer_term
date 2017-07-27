@@ -2,6 +2,7 @@ package cn.edu.zucc.ding.summerterm.ui;
 
 import cn.edu.zucc.ding.summerterm.control.SupplierControl;
 import cn.edu.zucc.ding.summerterm.model.Supplier;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
@@ -53,11 +54,13 @@ public class FrmSupplier_Add extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.Add_OK){
+            try{
             if(this.NameT.getText().equals("")||this.AddressT.getText().equals("")||this.LinkNameT.getText().equals("")){
-                JOptionPane.showMessageDialog(null,  "信息填写不完全","提示",JOptionPane.ERROR_MESSAGE);
-                return;
-            }else if(!DatabaseOP.regex("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$",this.LinkPhoneT.getText())) {
-                JOptionPane.showMessageDialog(null,  "联系人电话号码填写有误","提示",JOptionPane.ERROR_MESSAGE);
+                throw new BaseException("信息填写不完全");
+            }if(!DatabaseOP.regex("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$",this.LinkPhoneT.getText())) {
+                throw new BaseException("联系人电话号码填写有误");
+            }}catch (BaseException e1){
+                e1.printStackTrace();
                 return;
             }
             Supplier s = new Supplier(

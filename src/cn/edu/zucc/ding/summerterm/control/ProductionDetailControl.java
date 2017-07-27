@@ -30,6 +30,9 @@ public class ProductionDetailControl implements IProductiondetailsControl {
                 );
                 result.add(p);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,6 +56,9 @@ public class ProductionDetailControl implements IProductiondetailsControl {
                 );
                 result.add(p);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,6 +76,8 @@ public class ProductionDetailControl implements IProductiondetailsControl {
             pst.setInt(2,productiondetails.getMaterialsID());
             pst.setDouble(3,productiondetails.getMaterialsNumber());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,7 +93,10 @@ public class ProductionDetailControl implements IProductiondetailsControl {
             pst.setInt(1,productiondetails.getProductionID());
             pst.setInt(2,productiondetails.getMaterialsID());
             pst.setDouble(3,productiondetails.getMaterialsNumber());
+            System.out.print(productiondetails.getMaterialsID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,6 +109,8 @@ public class ProductionDetailControl implements IProductiondetailsControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

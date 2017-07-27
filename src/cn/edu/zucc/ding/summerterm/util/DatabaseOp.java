@@ -12,6 +12,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DatabaseOP {
+    public static boolean isDouble(String str)
+    {
+        try
+        {
+            Double.parseDouble(str);
+            return true;
+        }
+        catch(NumberFormatException ex){}
+        return false;
+    }
+
     public static boolean isNumeric(String str){
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(str);

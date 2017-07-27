@@ -2,6 +2,8 @@ package cn.edu.zucc.ding.summerterm.ui;
 
 import cn.edu.zucc.ding.summerterm.control.ProductionTypeControl;
 import cn.edu.zucc.ding.summerterm.model.Productiontype;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +42,16 @@ public class FrmProduction_Type extends JDialog implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.Add_OK){
+            try {
+                if(this.NameT.getText().equals("")){
+                    throw new BaseException("未输入产品类别名称");
+                }else if(this.IntroductionT.getText().equals("")){
+                    throw new BaseException("未输入产品类别描述");
+                }
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             ProductionTypeControl pc = new ProductionTypeControl();
             if (pt==null) {
                 Productiontype p = new Productiontype(1,this.NameT.getText(),this.IntroductionT.getText());

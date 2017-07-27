@@ -35,6 +35,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +66,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,6 +98,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,6 +130,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,6 +156,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -169,6 +184,9 @@ public class OtherControl {
                 );
                 result.add(m);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -194,6 +212,9 @@ public class OtherControl {
                 );
                 result.add(ms);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -217,6 +238,9 @@ public class OtherControl {
                 );
                 result.add(pas);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -243,6 +267,9 @@ public class OtherControl {
                 );
                 result.add(pas);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -269,6 +296,9 @@ public class OtherControl {
                 );
                 result.add(mas);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -301,6 +331,9 @@ public class OtherControl {
                 );
                 result.add(mas);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -333,6 +366,9 @@ public class OtherControl {
                 );
                 result.add(ms);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -366,6 +402,9 @@ public class OtherControl {
                 );
                 result.add(ms);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

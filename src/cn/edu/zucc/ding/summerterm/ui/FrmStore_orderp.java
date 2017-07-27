@@ -59,7 +59,9 @@ public class FrmStore_orderp extends JDialog implements ActionListener{
                         rs.getString(3)
                 );
                 pasos.add(paso);
-            }
+            }                rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

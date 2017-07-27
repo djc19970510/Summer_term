@@ -32,6 +32,9 @@ public class ProductingOrderControl implements IProductingorderControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,6 +51,8 @@ public class ProductingOrderControl implements IProductingorderControl {
             pst.setDouble(2, productingorder.getProductionNumber());
             pst.setTimestamp(3,productingorder.getDate());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +68,8 @@ public class ProductingOrderControl implements IProductingorderControl {
             pst.setDouble(2, productingorder.getProductionNumber());
             pst.setTimestamp(3,productingorder.getDate());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,6 +82,8 @@ public class ProductingOrderControl implements IProductingorderControl {
             Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

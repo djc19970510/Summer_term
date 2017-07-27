@@ -49,6 +49,9 @@ public class SupplierControl implements ISupplierControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,6 +79,9 @@ public class SupplierControl implements ISupplierControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,6 +101,8 @@ public class SupplierControl implements ISupplierControl {
             pst.setString(4,s.getIntroduction());
             pst.setString(5,s.getLinkPhone());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,6 +121,8 @@ public class SupplierControl implements ISupplierControl {
             pst.setString(4,supplier.getIntroduction());
             pst.setString(5,supplier.getLinkPhone());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,6 +137,8 @@ public class SupplierControl implements ISupplierControl {
             Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -30,6 +30,9 @@ public class ProductionTypeControl implements IProductiontypeControl{
                 );
                 productiontypes.add(pt);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,6 +55,9 @@ public class ProductionTypeControl implements IProductiontypeControl{
                 );
                 productiontypes.add(pt);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,6 +73,8 @@ public class ProductionTypeControl implements IProductiontypeControl{
             pst.setString(1,productiontype.getName());
             pst.setString(2,productiontype.getIntroduction());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,6 +89,8 @@ public class ProductionTypeControl implements IProductiontypeControl{
             pst.setString(1,productiontype.getName());
             pst.setString(2,productiontype.getIntroduction());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,6 +103,8 @@ public class ProductionTypeControl implements IProductiontypeControl{
             Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

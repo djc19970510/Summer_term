@@ -91,6 +91,8 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
                 pst.setDouble(1,Double.valueOf(numberT.getText()));
                 pst.setInt(2,m.getID());
                 pst.execute();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }

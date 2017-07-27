@@ -48,6 +48,8 @@ public class MaterialsOrderControl implements IMaterialsorderControl {
             pst.setDouble(2,materialsorder.getNumber());
             pst.setInt(3,materialsorder.getMaterialsID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,6 +66,8 @@ public class MaterialsOrderControl implements IMaterialsorderControl {
             pst.setInt(3,materialsorder.getMaterialsID());
             pst.setTimestamp(4,materialsorder.getDate());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,6 +80,8 @@ public class MaterialsOrderControl implements IMaterialsorderControl {
             Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

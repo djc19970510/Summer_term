@@ -35,6 +35,9 @@ public class MaterialsControl implements IMaterialsControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,6 +55,8 @@ public class MaterialsControl implements IMaterialsControl {
             pst.setString(3,materials.getIntroduction());
             pst.setInt(4,materials.getSupplierID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             try {
@@ -73,6 +78,8 @@ public class MaterialsControl implements IMaterialsControl {
             pst.setString(3,materials.getIntroduction());
             pst.setInt(4,materials.getSupplierID());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             try {
@@ -90,6 +97,8 @@ public class MaterialsControl implements IMaterialsControl {
             Connection conn =DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             try {

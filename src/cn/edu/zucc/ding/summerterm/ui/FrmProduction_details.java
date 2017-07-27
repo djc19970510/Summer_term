@@ -6,7 +6,9 @@ import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndDetails;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productiondetails;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 import sun.security.util.Resources_es;
 
 import javax.swing.*;
@@ -35,6 +37,14 @@ public class FrmProduction_details extends JDialog implements ActionListener {
     private int id1;
     public FrmProduction_details(FrmProduction fp,MaterialsAndDetails prod){
         this.materials = (new MaterialsControl()).loadAllMaterials();
+        try {
+            if(materials.size()<=0){
+                throw new BaseException("没有材料信息，请先输入材料");
+            }
+        }catch (BaseException e1){
+            e1.printStackTrace();
+            return;
+        }
         String[] materialsstring = new String[materials.size()];
         for(int i=0;i<materials.size();i++){
             materialsstring[i] = materials.get(i).getName();
@@ -71,6 +81,14 @@ public class FrmProduction_details extends JDialog implements ActionListener {
             this.setVisible(false);
             this.removeAll();
         }else if(e.getSource()==this.Add_OK){
+            if(!DatabaseOP.isDouble(this.NumberT.getText())){
+                try {
+                    throw new BaseException("数量输入不合法");
+                } catch (BaseException e1) {
+                    e1.printStackTrace();
+                    return;
+                }
+            }
             int sr = fp.table_production.getSelectedRow();
             Production pro = fp.productions.get(sr);
             int src = this.NameT.getSelectedIndex();
@@ -82,11 +100,24 @@ public class FrmProduction_details extends JDialog implements ActionListener {
                 if(rs.next()){
                     id1 = rs.getInt(1);
                 }else{
-                    JOptionPane.showMessageDialog(null,  "不存在此名称的材料","提示",JOptionPane.ERROR_MESSAGE);
-                    return;
+                    throw new BaseException("不存在此类材料");
                 }
+                System.out.println(pro.getID());
+                System.out.println(materials.get(src).getID());
+                sql = "select ID from productiondetails where ProductionID='"+pro.getID()+"' and MaterialsID='"+materials.get(src).getID()+"'";
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if(rs.next()){
+                    throw new BaseException("产品细节中已有该材料信息");
+                }
+                rs.close();
+                pst.close();
+                conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            } catch (BaseException e1){
+                e1.printStackTrace();
+                return;
             }
             Productiondetails pd = new Productiondetails(
                 prod==null?-1:prod.getID(),

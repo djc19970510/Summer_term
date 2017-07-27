@@ -5,6 +5,7 @@ import cn.edu.zucc.ding.summerterm.control.SupplierControl;
 import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndSuppliers;
 import cn.edu.zucc.ding.summerterm.model.Supplier;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,6 +75,18 @@ public class FrmMaterials_Add extends JDialog implements ActionListener {
             this.setVisible(false);
             this.removeAll();
         }else if(e.getSource()==this.Add_OK){
+            try {
+                if(this.suppliers.size()<=0){
+                    throw new BaseException("没有供应商信息，请先输入供应商");
+                }if(this.NameT.getText().equals("")){
+                    throw new BaseException("没有输入材料名称");
+                }if(this.IntroductionT.getText().equals("")){
+                    throw new BaseException("没有输入材料介绍");
+                }
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             int scom = this.SupplierT.getSelectedIndex();
             Supplier s = this.suppliers.get(scom);
             Materials ms = new Materials(

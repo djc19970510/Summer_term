@@ -41,6 +41,9 @@ public class CustomerControl implements ICustomerControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,6 +70,9 @@ public class CustomerControl implements ICustomerControl {
                 );
                 result.add(s);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,6 +91,8 @@ public class CustomerControl implements ICustomerControl {
             pst.setString(3,c.getLinkName());
             pst.setString(4,c.getLinkPhone());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,6 +109,8 @@ public class CustomerControl implements ICustomerControl {
             pst.setString(3,customer.getLinkName());
             pst.setString(4,customer.getLinkPhone());
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,6 +123,8 @@ public class CustomerControl implements ICustomerControl {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.execute();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
