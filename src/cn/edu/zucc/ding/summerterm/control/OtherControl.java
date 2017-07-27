@@ -280,5 +280,37 @@ public class OtherControl {
         }
         return result;
     }
-
+    public List<MaterialsAndSuppliers> loadSomeMaterialsAndSupplier(String s,double low,double high){
+        List<MaterialsAndSuppliers> result = new ArrayList<MaterialsAndSuppliers>();
+        s = "%"+s+"%";
+        String sql = "select materials.id,materials.name,MaterialsBasePrice,materials.Introduction,supplier.id,supplier.name " +
+                "FROM materials,supplier where SupplierID=supplier.ID and (" +
+                "materials.name like ? or MaterialsBasePrice like ? or materials.Introduction like ?" +
+                " or supplier.name like ?) and MaterialsBasePrice>=? and MaterialsBasePrice<=?";
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1,s);
+            pst.setString(2,s);
+            pst.setString(3,s);
+            pst.setString(4,s);
+            pst.setDouble(5,low);
+            pst.setDouble(6,high);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                MaterialsAndSuppliers ms = new MaterialsAndSuppliers(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6)
+                );
+                result.add(ms);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

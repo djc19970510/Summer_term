@@ -12,6 +12,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DatabaseOP {
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if( !isNum.matches() ){
+            return false;
+        }
+        return true;
+    }
+
     public static String select(String element,String table,String condition){
         String sql = "Select " + element + " from " +table;
         if(!condition.equals("")){

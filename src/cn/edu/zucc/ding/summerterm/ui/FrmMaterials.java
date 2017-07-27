@@ -4,7 +4,9 @@ import cn.edu.zucc.ding.summerterm.control.MaterialsControl;
 import cn.edu.zucc.ding.summerterm.control.OtherControl;
 import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndSuppliers;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DbException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +23,10 @@ import java.util.List;
 public class FrmMaterials extends JPanel implements ActionListener{
     private JPanel task = new JPanel();
     private JPanel tablepanel = new JPanel();
+    private JLabel pricetolabel = new JLabel("价格区间");
+    private JTextField lowprice = new JTextField(2);
+    private JTextField highprice = new JTextField(2);
+    private JLabel tolabel = new JLabel("-");
     private JButton Materials_add = new JButton("增加");
     private JButton Materials_del = new JButton("删除");
     private JButton Materials_mod = new JButton("修改");
@@ -48,21 +54,32 @@ public class FrmMaterials extends JPanel implements ActionListener{
         Materials_sel.addActionListener(this);
 
         this.add(task, BorderLayout.SOUTH);
-        task.setBackground(new Color(77, 77, 77));
+        task.setBackground(new Color(188, 188, 188));
         task.add(Materials_add);
         task.add(Materials_del);
         task.add(Materials_mod);
         task.add(Materials_selectText);
         this.setVisible(true);
         task.add(Materials_sel);
-        this.reloadTable(null);
+        task.add(pricetolabel);
+        task.add(lowprice);
+        task.add(tolabel);
+        task.add(highprice);
+
+        this.reloadTable(null,null,null);
     }
 
-    protected void reloadTable(String s) {
+    protected void reloadTable(String s,String low,String high) {
+        double low1 = 0;
+        double high1 = Double.MAX_VALUE;
+        if(!(low==null||low.equals("")))
+            low1 = Double.valueOf(low);
+        if(!(high==null||high.equals("")))
+            high1 = Double.valueOf(high);
         if(s==null)
             materialsAndSuppliers = (new OtherControl()).loadSomeMaterialsAndSupplier();
         else
-            materialsAndSuppliers = (new OtherControl()).loadSomeMaterialsAndSupplier(s);
+            materialsAndSuppliers = (new OtherControl()).loadSomeMaterialsAndSupplier(s,low1,high1);
         tblData = new Object[materialsAndSuppliers.size()][5];
         for (int i = 0; i < materialsAndSuppliers.size(); i++) {
             tblData[i][0] = i+1 + "";
@@ -84,7 +101,11 @@ public class FrmMaterials extends JPanel implements ActionListener{
         } else if (e.getSource() == this.Materials_del){
             int i=this.Materials_infotable.getSelectedRow();
             if(i<0){
-                JOptionPane.showMessageDialog(null,  "请选择删除的材料","提示",JOptionPane.ERROR_MESSAGE);
+                try {
+                    throw new BaseException("请选择删除的材料");
+                } catch (BaseException e1) {
+                    e1.printStackTrace();
+                }
                 return;
             }
             String sql = "select * from productiondetails where MaterialsID=?";
@@ -95,29 +116,39 @@ public class FrmMaterials extends JPanel implements ActionListener{
                 pst.setInt(1,mas.getID());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null,  "无法删除，有产品使用此材料","提示",JOptionPane.ERROR_MESSAGE);
-                    return;
+                    throw new BaseException("无法删除，有产品使用此材料");
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
+                try {
+                    throw new DbException(e1);
+                } catch (DbException e2) {
+                    e2.printStackTrace();
+                }
+            }catch (BaseException e2){
+                e2.printStackTrace();
             }
             Materials m = new Materials();
             m.setID(mas.getID());
             (new MaterialsControl()).delMaterials(m);
-            this.reloadTable(null);
+            this.reloadTable(null,null,null);
         } else if (e.getSource() == this.Materials_sel) {
             String s = this.Materials_selectText.getText();
-            this.reloadTable(s);
+            this.reloadTable(s,lowprice.getText(),highprice.getText());
         } else if (e.getSource() == this.Materials_mod) {
             int i=this.Materials_infotable.getSelectedRow();
             if(i<0){
-                JOptionPane.showMessageDialog(null,  "请选择材料","提示",JOptionPane.ERROR_MESSAGE);
+                try {
+                    throw new BaseException("请选择材料");
+                } catch (BaseException e1) {
+                    e1.printStackTrace();
+                }
                 return;
             }
             MaterialsAndSuppliers mas = this.materialsAndSuppliers.get(i);
             FrmMaterials_Add dlg = new FrmMaterials_Add(this,mas);
             dlg.setVisible(true);
-            this.reloadTable(null);
+            this.reloadTable(null,null,null);
         }
     }
 }

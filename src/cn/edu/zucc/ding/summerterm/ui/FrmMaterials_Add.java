@@ -83,7 +83,7 @@ public class FrmMaterials_Add extends JDialog implements ActionListener {
                 (new MaterialsControl()).addMaterials(ms);
             else
                 (new MaterialsControl()).modifyMaterials(ms);
-            fm.reloadTable(null);
+            fm.reloadTable(null,null,null);
             this.setVisible(false);
             this.removeAll();
         }

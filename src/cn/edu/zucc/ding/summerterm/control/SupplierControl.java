@@ -14,12 +14,19 @@ import java.util.List;
 
 public class SupplierControl implements ISupplierControl {
 
+
+
     public List<Supplier> loadSomeSupplier(String phrase){
+        String phrase2 = phrase;
+
         phrase = "%"+phrase+"%";
         List<Supplier> result = null;
         String sql = DatabaseOP.select("*","Supplier",
                 "where Name like ? or Address like ? or LinkName like ?" +
                         " or Introduction like ? or LinkPhone like ?");
+        if(phrase2!=null&&DatabaseOP.isNumeric(phrase2)){
+            sql += " or id="+phrase2;
+        }
         Connection conn = null;
         try {
             conn = DBUtil.getConnection();

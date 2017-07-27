@@ -4,6 +4,7 @@ import cn.edu.zucc.ding.summerterm.Icontrol.IMaterialsControl;
 import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
+import cn.edu.zucc.ding.summerterm.util.DbException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,6 +54,11 @@ public class MaterialsControl implements IMaterialsControl {
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e2) {
+                e2.printStackTrace();
+            }
         }
     }
 
@@ -69,6 +75,11 @@ public class MaterialsControl implements IMaterialsControl {
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e2) {
+                e2.printStackTrace();
+            }
         }
     }
 
@@ -81,6 +92,11 @@ public class MaterialsControl implements IMaterialsControl {
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e2) {
+                e2.printStackTrace();
+            }
         }
     }
 }

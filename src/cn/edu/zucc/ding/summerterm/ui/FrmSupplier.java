@@ -19,7 +19,7 @@ public class FrmSupplier extends JPanel implements ActionListener {
     private JButton Supplier_mod = new JButton("修改");
     private JButton Supplier_sel = new JButton("查询");
     private JTextField Supplier_selectText = new JTextField(15);
-    private Object tblTitle[] = {"供应商序号", "供应商姓名", "供应商地址", "供应商描述", "联系人姓名", "联系人电话"};
+    private Object tblTitle[] = {"序号","供应商编号", "供应商姓名", "供应商地址", "供应商描述", "联系人姓名", "联系人电话"};
     private Object tblData[][];
     DefaultTableModel tablmod = new DefaultTableModel();
     List<Supplier> suppliers;
@@ -54,18 +54,19 @@ public class FrmSupplier extends JPanel implements ActionListener {
     }
 
     protected void reloadTable(String s) {
-        if(s==null)
+        if(s==null||s.equals(""))
             suppliers = (new SupplierControl()).loadAllSupplier();
         else
             suppliers = (new SupplierControl()).loadSomeSupplier(s);
-        tblData = new Object[suppliers.size()][6];
+        tblData = new Object[suppliers.size()][7];
         for (int i = 0; i < suppliers.size(); i++) {
             tblData[i][0] = i+1 + "";
-            tblData[i][1] = suppliers.get(i).getName();
-            tblData[i][2] = suppliers.get(i).getAddress();
-            tblData[i][4] = suppliers.get(i).getLinkName();
-            tblData[i][3] = suppliers.get(i).getIntroduction();
-            tblData[i][5] = suppliers.get(i).getLinkPhone();
+            tblData[i][1] = suppliers.get(i).getID();
+            tblData[i][2] = suppliers.get(i).getName();
+            tblData[i][3] = suppliers.get(i).getAddress();
+            tblData[i][5] = suppliers.get(i).getLinkName();
+            tblData[i][4] = suppliers.get(i).getIntroduction();
+            tblData[i][6] = suppliers.get(i).getLinkPhone();
         }
         tablmod.setDataVector(tblData, tblTitle);
         this.Supplier_infotable.validate();

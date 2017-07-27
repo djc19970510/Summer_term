@@ -65,14 +65,14 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
             Materials m = materialsl.get(sr);
             Materialsorder mo = new Materialsorder(-1,Double.valueOf(priceT.getText()),Double.valueOf(numberT.getText()),m.getID(),Timestamp.valueOf(DateT.getText()));
             (new MaterialsOrderControl()).addMaterialsorder(mo);
-            String sql = "select id from materialsorder where price=? and number=? and materialsid=? and date=?";
+            String sql = "select id from materialsorder order by id desc";
             try {
                 Connection conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setDouble(1,Double.valueOf(priceT.getText()));
-                pst.setDouble(2,Double.valueOf(numberT.getText()));
-                pst.setInt(3,m.getID());
-                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
+//                pst.setDouble(1,Double.valueOf(priceT.getText()));
+//                pst.setDouble(2,Double.valueOf(numberT.getText()));
+//                pst.setInt(3,m.getID());
+//                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     id=rs.getInt(1);

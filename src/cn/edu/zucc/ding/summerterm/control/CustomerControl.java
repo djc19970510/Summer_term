@@ -14,10 +14,14 @@ import java.util.List;
 
 public class CustomerControl implements ICustomerControl {
     public List<Customer> loadSomeCustomer(String phrase) {
+        String phrase2 = phrase;
         phrase = "%"+phrase+"%";
         List<Customer> result = null;
         String sql = DatabaseOP.select("*","Customer",
                 "where Name like ? or Address like ? or LinkName like ? or LinkPhone like ?");
+        if(DatabaseOP.isNumeric(phrase2)){
+            sql+=" or id="+phrase2;
+        }
         try {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);

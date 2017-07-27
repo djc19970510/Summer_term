@@ -30,7 +30,7 @@ public class FrmOrder extends JPanel implements ActionListener {
     private JTable Ordersm_infotable = new JTable(tablmmod);
     private JScrollPane Ordersm_infotableheader = new JScrollPane(Ordersm_infotable);
 
-    private Object tblpTitle[] = {"序号", "产品名", "产品数量", "价格","客户", "日期"};
+    private Object tblpTitle[] = {"序号", "产品名", "产品数量", "客户","价格", "日期"};
     private Object tblpData[][];
     DefaultTableModel tablpmod = new DefaultTableModel();
     List<ProductionsAndOrder> productionsAndOrders;
@@ -57,13 +57,13 @@ public class FrmOrder extends JPanel implements ActionListener {
         clist = new JList(cuss);
         this.setVisible(true);
         this.setLayout(new BorderLayout());
-        this.add(left,BorderLayout.WEST);
+        this.add(left,BorderLayout.EAST);
             left.setLayout(new BorderLayout());
             left.add(Ordersp_infotableheader,BorderLayout.CENTER);
         this.add(center,BorderLayout.CENTER);
-            center.add(sold);
             center.add(buy);
-        this.add(right,BorderLayout.EAST);
+            center.add(sold);
+        this.add(right,BorderLayout.WEST);
             right.setLayout(new BorderLayout());
             right.add(Ordersm_infotableheader,BorderLayout.CENTER);
         this.reloadm(null);

@@ -15,6 +15,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductionControl implements IProductionControl {
+    public List<Production> loadSomeProduction(String a,String low,String high){
+        double low1 = 0;
+        double high1 = Double.MAX_VALUE;
+        if(!(low==null||low.equals("")))
+            low1 = Double.valueOf(low);
+        if(!(high==null||high.equals("")))
+            high1 = Double.valueOf(high);
+        List<Production> result = new ArrayList<Production>();
+        String sql = DatabaseOP.select("*","production","where (price>=? and price<=?) and name like ?");
+        try {
+            Connection conn = DBUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setDouble(1,low1);
+            pst.setDouble(2,high1);
+            pst.setString(3,"%"+a+"%");
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                Production p = new Production(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4)
+                );
+                result.add(p);
+            };
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public List<Production> loadSomeProduction(Productiontype pt){
         List<Production> result = new ArrayList<Production>();
         String sql = DatabaseOP.select("*","production","where productiontypeid="+pt.getID());

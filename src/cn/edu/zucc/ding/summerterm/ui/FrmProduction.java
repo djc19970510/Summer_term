@@ -43,7 +43,14 @@ public class FrmProduction extends JPanel implements ActionListener {
             private JButton add_pro = new JButton("增加产品");
             private JButton del_pro = new JButton("删除产品");
             private JButton mod_pro = new JButton("修改产品");
-        private JPanel main_center_center_task = new JPanel();
+            private JTextField sel_pro_Text = new JTextField(10);
+            private JButton sel_pro = new JButton("查询产品");
+            private JLabel price = new JLabel("价格");
+            private JTextField low_text = new JTextField(4);
+            private JLabel pricetp = new JLabel("-");
+            private JTextField high_text = new JTextField(4);
+
+    private JPanel main_center_center_task = new JPanel();
             private Object proTitle[] = {"产品序号","产品名称", "产品价格"};
             private Object proData[][];
             DefaultTableModel protablmod = new DefaultTableModel();
@@ -116,9 +123,16 @@ public class FrmProduction extends JPanel implements ActionListener {
             main_center_top_task.add(add_pro);
             main_center_top_task.add(del_pro);
             main_center_top_task.add(mod_pro);
+            main_center_top_task.add(sel_pro_Text);
+            main_center_top_task.add(sel_pro);
+            main_center_top_task.add(price);
+            main_center_top_task.add(high_text);
+            main_center_top_task.add(pricetp);
+            main_center_top_task.add(low_text);
             this.add_pro.addActionListener(this);
             this.mod_pro.addActionListener(this);
             this.del_pro.addActionListener(this);
+            this.sel_pro.addActionListener(this);
             //中部中部任务栏
             main_center_center_task.setLayout(new BorderLayout());
             main_center_center_task.add(table_scrollproduction,BorderLayout.CENTER);
@@ -179,6 +193,19 @@ public class FrmProduction extends JPanel implements ActionListener {
         return;
     }
 
+    public void reloadAll(String a,String low,String high){
+        productions = (new ProductionControl()).loadSomeProduction(a,high,low);
+        proData = new Object[productions.size()][3];
+        for (int i = 0; i < productions.size(); i++) {
+            proData[i][0] = i+1 + "";
+            proData[i][1] = productions.get(i).getName();
+            proData[i][2] = productions.get(i).getPrice()+"";
+        }
+        protablmod.setDataVector(proData, proTitle);
+        this.table_production.validate();
+        this.table_production.repaint();
+        return;
+    }
 
     public void reloadAllDetails(Production pt){
         productiondetails = (new OtherControl()).loadSomeMaterialsAndDetails(pt);
@@ -303,6 +330,8 @@ public class FrmProduction extends JPanel implements ActionListener {
             }
             int srp = table_production.getSelectedRow();
             this.reloadAllDetails(productions.get(srp));
+        }else if(e.getSource()==this.sel_pro){
+            this.reloadAll(this.sel_pro_Text.getText(),this.low_text.getText(),this.high_text.getText());
         }
     }
 

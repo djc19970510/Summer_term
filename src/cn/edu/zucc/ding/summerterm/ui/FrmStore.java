@@ -25,6 +25,7 @@ public class FrmStore extends JPanel implements ActionListener{
             private JButton Del_m = new JButton("修改");
             private JTextField sel_m_text = new JTextField(15);
             private JButton Sel_m = new JButton("查询");
+            private JButton order_m = new JButton("出入库情况");
     private JPanel right = new JPanel();
         private JPanel right_top = new JPanel();
             private Object tblPTitle[] = {"序号", "产品名称", "产品存放数量", "存放地址"};
@@ -38,6 +39,7 @@ public class FrmStore extends JPanel implements ActionListener{
             private JButton Del_p = new JButton("修改");
             private JTextField sel_p_text = new JTextField(15);
             private JButton Sel_p = new JButton("查询");
+            private JButton order_p = new JButton("出入库情况");
 
 
     public FrmStore(){
@@ -58,9 +60,11 @@ public class FrmStore extends JPanel implements ActionListener{
         left_top.add(Del_m);
         left_top.add(sel_m_text);
         left_top.add(Sel_m);
+        left_top.add(order_m);
         this.Add_m.addActionListener(this);
         this.Del_m.addActionListener(this);
         this.Sel_m.addActionListener(this);
+        this.order_m.addActionListener(this);
         left_mid.add(Materials_infotableheader);
 
         right.setLayout(new BorderLayout());
@@ -71,9 +75,11 @@ public class FrmStore extends JPanel implements ActionListener{
         right_top.add(Del_p);
         right_top.add(sel_p_text);
         right_top.add(Sel_p);
+        right_top.add(order_p);
         this.Add_p.addActionListener(this);
         this.Del_p.addActionListener(this);
         this.Sel_p.addActionListener(this);
+        this.order_p.addActionListener(this);
         right_mid.add(Productions_infotableheader);
         this.reloadmTable(null);
         this.reloadpTable(null);
@@ -146,6 +152,10 @@ public class FrmStore extends JPanel implements ActionListener{
             FrmStore_addm dlg = new FrmStore_addm(this);
         }else if(e.getSource()==this.Add_p){
             FrmStore_addp dlg = new FrmStore_addp(this);
+        }else if(e.getSource()==this.order_m){
+            FrmStore_orderm dlg = new FrmStore_orderm();
+        }else if(e.getSource()==this.order_p){
+            FrmStore_orderp dlg = new FrmStore_orderp();
         }
     }
 }

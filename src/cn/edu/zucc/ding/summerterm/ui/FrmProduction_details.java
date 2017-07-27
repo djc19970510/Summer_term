@@ -1,6 +1,8 @@
 package cn.edu.zucc.ding.summerterm.ui;
 
+import cn.edu.zucc.ding.summerterm.control.MaterialsControl;
 import cn.edu.zucc.ding.summerterm.control.ProductionDetailControl;
+import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndDetails;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productiondetails;
@@ -15,13 +17,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FrmProduction_details extends JDialog implements ActionListener {
+    private List<Materials> materials;
     private JLabel NameL =
             new JLabel("材料名称");
     private JLabel NumberL =
             new JLabel("材料数量");
-    private JTextField NameT = new JTextField(15);
+    private JComboBox NameT;
     private JTextField NumberT = new JTextField(15);
     private JButton Add_OK = new JButton("确认");
     private JButton Add_Cancel = new JButton("取消");
@@ -30,12 +34,26 @@ public class FrmProduction_details extends JDialog implements ActionListener {
     private Production pt;
     private int id1;
     public FrmProduction_details(FrmProduction fp,MaterialsAndDetails prod){
+        this.materials = (new MaterialsControl()).loadAllMaterials();
+        String[] materialsstring = new String[materials.size()];
+        for(int i=0;i<materials.size();i++){
+            materialsstring[i] = materials.get(i).getName();
+        }
+        NameT = new JComboBox(materialsstring);
+        NameT.setPreferredSize(new Dimension(170,20));
         this.fp = fp;
         this.prod = prod;
         this.setLayout(new FlowLayout());
         this.add(NameL);
         this.add(NameT);
-        this.NameT.setText(prod==null?"":prod.getName());
+        int t=0;
+        if(prod!=null){
+            for(int i=0;i<materials.size();i++){
+                if(prod.getName().equals(materials.get(i).getName()))
+                    t=i;
+            }
+        }
+        this.NameT.setSelectedIndex(t);
         this.add(NumberL);
         this.add(NumberT);
         this.NumberT.setText(prod==null?"":prod.getNumber().toString());
@@ -55,7 +73,8 @@ public class FrmProduction_details extends JDialog implements ActionListener {
         }else if(e.getSource()==this.Add_OK){
             int sr = fp.table_production.getSelectedRow();
             Production pro = fp.productions.get(sr);
-            String sql = "select ID from materials where name='"+this.NameT.getText()+"'";
+            int src = this.NameT.getSelectedIndex();
+            String sql = "select ID from materials where name='"+materials.get(src).getName()+"'";
             try {
                 Connection conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
