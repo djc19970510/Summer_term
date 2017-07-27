@@ -15,13 +15,16 @@ import java.util.List;
 
 public class FrmOrder extends JPanel implements ActionListener {
     private JPanel left = new JPanel();
-    private JPanel left_top = new JPanel();
-    private JPanel left_mid = new JPanel();
-    private JPanel left_buttom = new JPanel();
     private JPanel center = new JPanel();
     private JPanel right = new JPanel();
+    private JPanel left_top = new JPanel();
+    private JPanel right_top = new JPanel();
     private JButton buy = new JButton("购入材料");
     private JButton sold = new JButton("卖出产品");
+    private JButton sel_m = new JButton("查询");
+    private JButton sel_p = new JButton("查询");
+    private JTextField text_m = new JTextField(10);
+    private JTextField text_p = new JTextField(10);
 
     private Object tblmTitle[] = {"序号", "材料名", "材料数量", "价格", "供应商", "日期"};
     private Object tblmData[][];
@@ -60,23 +63,33 @@ public class FrmOrder extends JPanel implements ActionListener {
         this.add(left,BorderLayout.EAST);
             left.setLayout(new BorderLayout());
             left.add(Ordersp_infotableheader,BorderLayout.CENTER);
+            left.add(left_top,BorderLayout.NORTH);
+            left_top.setLayout(new FlowLayout());
+            left_top.add(text_p);
+            left_top.add(sel_p);
         this.add(center,BorderLayout.CENTER);
             center.add(buy);
             center.add(sold);
         this.add(right,BorderLayout.WEST);
             right.setLayout(new BorderLayout());
             right.add(Ordersm_infotableheader,BorderLayout.CENTER);
+            right.add(right_top,BorderLayout.NORTH);
+            right_top.setLayout(new FlowLayout());
+            right_top.add(text_m);
+            right_top.add(sel_m);
         this.reloadm(null);
         this.reloadp(null);
         this.buy.addActionListener(this);
         this.sold.addActionListener(this);
+        this.sel_p.addActionListener(this);
+        this.sel_m.addActionListener(this);
     }
 
     public void reloadp(String s){
-        if(s==null)
+        if(s==null||s.equals(""))
             productionsAndOrders = (new OtherControl()).loadAllProductionsAndOrder();
-        else{}
-        //materialsAndOrders = (new OtherControl()).loadSomeSupplier(s);
+        else
+            productionsAndOrders = (new OtherControl()).loadAllProductionsAndOrder(s);
         tblpData = new Object[productionsAndOrders.size()][6];
         for (int i = 0; i < productionsAndOrders.size(); i++) {
             tblpData[i][0] = i+1 + "";
@@ -92,10 +105,10 @@ public class FrmOrder extends JPanel implements ActionListener {
     }
 
     public void reloadm(String s){
-        if(s==null)
+        if(s==null||s.equals(""))
             materialsAndOrders = (new OtherControl()).loadAllMaterialsAndOrder();
-        else{}
-            //materialsAndOrders = (new OtherControl()).loadSomeSupplier(s);
+        else
+            materialsAndOrders = (new OtherControl()).loadAllMaterialsAndOrder(s);
         tblmData = new Object[materialsAndOrders.size()][6];
         for (int i = 0; i < materialsAndOrders.size(); i++) {
             tblmData[i][0] = i+1 + "";
@@ -116,6 +129,10 @@ public class FrmOrder extends JPanel implements ActionListener {
             FrmOrder_buymaterials dlg = new FrmOrder_buymaterials(this);
         }else if(e.getSource()==this.sold){
             FrmOrder_soldmaterials dlg = new FrmOrder_soldmaterials(this);
+        }else if(e.getSource()==this.sel_m){
+            this.reloadm(this.text_m.getText());
+        }else if(e.getSource()==this.sel_p){
+            this.reloadp(this.text_p.getText());
         }
     }
 }

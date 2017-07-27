@@ -96,15 +96,15 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
             Productionorder po = new Productionorder(-1,Double.valueOf(priceT.getText()),Double.valueOf(numberT.getText()),
                     Timestamp.valueOf(DateT.getText()),c.getID(),p.getID());
             (new ProductionOrderControl()).addProductionorder(po);
-            String sql = "select id from productionorder where price=? and number=? and ProductionID=? and date=? and customerid=?";
+            String sql = "select id from productionorder order by id desc";
             try {
                 Connection conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
-                pst.setDouble(1,Double.valueOf(priceT.getText()));
-                pst.setDouble(2,Double.valueOf(numberT.getText()));
-                pst.setInt(3,p.getID());
-                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
-                pst.setInt(5,c.getID());
+//                pst.setDouble(1,Double.valueOf(priceT.getText()));
+//                pst.setDouble(2,Double.valueOf(numberT.getText()));
+//                pst.setInt(3,p.getID());
+//                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
+//                pst.setInt(5,c.getID());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     id=rs.getInt(1);
@@ -113,7 +113,7 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
                 e1.printStackTrace();
             }
 
-            Productionstoreorder pso = new Productionstoreorder(-1,p.getID(),Double.valueOf(numberT.getText()),Timestamp.valueOf(DateT.getText()),id);
+            Productionstoreorder pso = new Productionstoreorder(-1,p.getID(),-Double.valueOf(numberT.getText()),Timestamp.valueOf(DateT.getText()),id);
             (new ProductionStoreOrderControl()).addProductionstoreorder(pso);
             sql = "update productionstore set Number=Number-? where ProductionID=?";
             try {

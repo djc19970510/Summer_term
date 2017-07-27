@@ -21,10 +21,18 @@ public class FrmStore_orderm extends JDialog implements ActionListener{
     DefaultTableModel tablmod = new DefaultTableModel();
     private JTable Producting_infotable = new JTable(tablmod);
     private JScrollPane Producting_infotableheader = new JScrollPane(Producting_infotable);
-    private List<MaterialsAndStoreOrder> masol ;
+    private List<MaterialsAndStoreOrder> masol;
+    private JPanel up = new JPanel();
+    private JTextField seltext = new JTextField(15);
+    private JButton selb = new JButton("查询");
     public FrmStore_orderm(){
         this.setLayout(new BorderLayout());
         this.add(Producting_infotableheader,BorderLayout.CENTER);
+        this.add(up,BorderLayout.NORTH);
+        up.setLayout(new FlowLayout());
+        up.add(seltext);
+        up.add(selb);
+        this.selb.addActionListener(this);
         this.setSize(800,600);
         this.setVisible(true);
         this.reloadTable(null);
@@ -37,6 +45,8 @@ public class FrmStore_orderm extends JDialog implements ActionListener{
             String sql = "SELECT materialsstoreorder.id,materialsstoreorder.Number,materialsstoreorder.Date,materials.id,materials.name,materialsstoreorder.OrderID " +
                     "FROM materialsstoreorder,materials " +
                     "where MaterialsID=materials.id";
+            if(s!=null&&!s.equals(""))
+                    sql += " and materials.name like '%"+s+"%'";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
@@ -60,7 +70,7 @@ public class FrmStore_orderm extends JDialog implements ActionListener{
             tblData[i][2] = masol.get(i).getNumber()>0?masol.get(i).getNumber():-masol.get(i).getNumber();
             tblData[i][3] = masol.get(i).getDate();
             tblData[i][4] = masol.get(i).getOrderID();
-            tblData[i][5] = masol.get(i).getNumber()>0?"入库":"出库";
+            tblData[i][5] = masol.get(i).getNumber()>0?"入库:购买材料":"出库:生产";
         }
         tablmod.setDataVector(tblData, tblTitle);
         this.Producting_infotable.validate();
@@ -69,6 +79,8 @@ public class FrmStore_orderm extends JDialog implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==this.selb){
+            reloadTable(this.seltext.getText());
+        }
     }
 }

@@ -82,6 +82,7 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
             }
 
             Materialsstoreorder mso = new Materialsstoreorder(-1,Double.valueOf(numberT.getText()),Timestamp.valueOf(DateT.getText()),m.getID(),id);
+            System.out.println(id);
             (new MaterialsStoreOrderControl()).addMaterialsstoreorder(mso);
             sql = "update materialsstore set Number=Number+? where MaterialsID=?";
             try {

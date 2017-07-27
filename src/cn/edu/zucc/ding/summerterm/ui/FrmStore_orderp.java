@@ -22,9 +22,17 @@ public class FrmStore_orderp extends JDialog implements ActionListener{
     private JTable Producting_infotable = new JTable(tablmod);
     private JScrollPane Producting_infotableheader = new JScrollPane(Producting_infotable);
     private List<ProductionAndStoreOrder> pasos ;
+    private JPanel up = new JPanel();
+    private JTextField seltext = new JTextField(15);
+    private JButton selb = new JButton("查询");
     public FrmStore_orderp(){
         this.setLayout(new BorderLayout());
         this.add(Producting_infotableheader,BorderLayout.CENTER);
+        this.add(up,BorderLayout.NORTH);
+        up.setLayout(new FlowLayout());
+        up.add(seltext);
+        up.add(selb);
+        this.selb.addActionListener(this);
         this.setSize(800,600);
         this.setVisible(true);
         this.reloadTable(null);
@@ -37,6 +45,8 @@ public class FrmStore_orderp extends JDialog implements ActionListener{
             String sql = "SELECT productionstoreorder.ID,productionstoreorder.ProductionID,production.name,Number,productionstoreorder.Date,productionstoreorder.OrderID " +
                     "FROM mydb.productionstoreorder,production " +
                     "where productionstoreorder.productionid=production.id";
+            if(s!=null&&!s.equals(""))
+                sql += " and production.name like '%"+s+"%'";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
@@ -60,7 +70,7 @@ public class FrmStore_orderp extends JDialog implements ActionListener{
             tblData[i][2] = pasos.get(i).getNumber()>0?pasos.get(i).getNumber():-pasos.get(i).getNumber();
             tblData[i][3] = pasos.get(i).getDate();
             tblData[i][4] = pasos.get(i).getOrderID();
-            tblData[i][5] = pasos.get(i).getNumber()>0?"入库":"出库";
+            tblData[i][5] = pasos.get(i).getNumber()>0?"入库:生产":"出库:卖出产品";
         }
         tablmod.setDataVector(tblData, tblTitle);
         this.Producting_infotable.validate();
@@ -69,6 +79,8 @@ public class FrmStore_orderp extends JDialog implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==this.selb){
+            reloadTable(this.seltext.getText());
+        }
     }
 }
