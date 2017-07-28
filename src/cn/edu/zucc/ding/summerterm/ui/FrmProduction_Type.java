@@ -3,12 +3,17 @@ package cn.edu.zucc.ding.summerterm.ui;
 import cn.edu.zucc.ding.summerterm.control.ProductionTypeControl;
 import cn.edu.zucc.ding.summerterm.model.Productiontype;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class FrmProduction_Type extends JDialog implements ActionListener{
     private JLabel NameL =
@@ -48,19 +53,36 @@ public class FrmProduction_Type extends JDialog implements ActionListener{
                 }else if(this.IntroductionT.getText().equals("")){
                     throw new BaseException("未输入产品类别描述");
                 }
+                if(pt==null){
+                    Connection conn = DBUtil.getConnection();
+                    String sql = "select * from productiontype where Name=?";
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.setString(1,this.NameT.getText());
+                    ResultSet rs = pst.executeQuery();
+                    if(rs.next()){
+                        rs.close();
+                        pst.close();
+                        conn.close();
+                        throw new BaseException("产品类型名重复");
+                    }
+                    rs.close();
+                    pst.close();
+                    conn.close();
+                }
+            }catch (SQLException e1) {
+                e1.printStackTrace();
             }catch (BaseException e1){
                 e1.printStackTrace();
                 return;
             }
-            ProductionTypeControl pc = new ProductionTypeControl();
             if (pt==null) {
                 Productiontype p = new Productiontype(1,this.NameT.getText(),this.IntroductionT.getText());
-                pc.addProductiontype(p);
+                (new ProductionTypeControl()).addProductiontype(p);
             }
             else {
                 pt.setName(this.NameT.getText());
                 pt.setIntroduction(this.IntroductionT.getText());
-                pc.modifyProductiontype(pt);
+                (new ProductionTypeControl()).modifyProductiontype(pt);
             }
             this.f.reloadAllType("");
             this.setVisible(false);

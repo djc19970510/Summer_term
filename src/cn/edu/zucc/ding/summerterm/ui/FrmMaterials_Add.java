@@ -6,11 +6,18 @@ import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndSuppliers;
 import cn.edu.zucc.ding.summerterm.model.Supplier;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FrmMaterials_Add extends JDialog implements ActionListener {
@@ -82,10 +89,35 @@ public class FrmMaterials_Add extends JDialog implements ActionListener {
                     throw new BaseException("没有输入材料名称");
                 }if(this.IntroductionT.getText().equals("")){
                     throw new BaseException("没有输入材料介绍");
+                }if(!DatabaseOP.isDouble(this.PriceT.getText())){
+                    throw new BaseException("价格输入不合法");
                 }
             }catch (BaseException e1){
                 e1.printStackTrace();
                 return;
+            }
+            if(mas==null){
+                try{
+                    Connection conn = DBUtil.getConnection();
+                    String sql = "select * from materials where Name=?";
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.setString(1,NameT.getText());
+                    ResultSet rs = pst.executeQuery();
+                    if(rs.next()){
+                        rs.close();
+                        pst.close();
+                        conn.close();
+                        throw new BaseException("材料名称有重复");
+                    }
+                    rs.close();
+                    pst.close();
+                    conn.close();
+                }catch (SQLException e1){
+                    e1.printStackTrace();
+                } catch (BaseException e1){
+                    e1.printStackTrace();
+                    return;
+                }
             }
             int scom = this.SupplierT.getSelectedIndex();
             Supplier s = this.suppliers.get(scom);

@@ -8,7 +8,9 @@ import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.Materialsorder;
 import cn.edu.zucc.ding.summerterm.model.Materialsstore;
 import cn.edu.zucc.ding.summerterm.model.Materialsstoreorder;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,16 +65,30 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
             int id=-1;
             int sr = materialsbox.getSelectedIndex();
             Materials m = materialsl.get(sr);
+            Connection conn = null;
+            String sql = "select id from materialsstore where MaterialsID=?";
+            try {
+                conn = DBUtil.getConnection();
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setInt(1,m.getID());
+                ResultSet rs = pst.executeQuery();
+                if(!rs.next()){throw new BaseException("该材料未设置存放仓库");}
+                rs.close();
+                pst.close();
+                conn.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
+
             Materialsorder mo = new Materialsorder(-1,Double.valueOf(priceT.getText()),Double.valueOf(numberT.getText()),m.getID(),Timestamp.valueOf(DateT.getText()));
             (new MaterialsOrderControl()).addMaterialsorder(mo);
-            String sql = "select id from materialsorder order by id desc";
+            sql = "select id from materialsorder order by id desc";
             try {
-                Connection conn = DBUtil.getConnection();
+                conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
-//                pst.setDouble(1,Double.valueOf(priceT.getText()));
-//                pst.setDouble(2,Double.valueOf(numberT.getText()));
-//                pst.setInt(3,m.getID());
-//                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     id=rs.getInt(1);
@@ -86,7 +102,7 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
             (new MaterialsStoreOrderControl()).addMaterialsstoreorder(mso);
             sql = "update materialsstore set Number=Number+? where MaterialsID=?";
             try {
-                Connection conn = DBUtil.getConnection();
+                conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
                 pst.setDouble(1,Double.valueOf(numberT.getText()));
                 pst.setInt(2,m.getID());

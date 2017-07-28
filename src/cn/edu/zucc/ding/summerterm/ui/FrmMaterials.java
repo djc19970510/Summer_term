@@ -6,6 +6,7 @@ import cn.edu.zucc.ding.summerterm.model.Materials;
 import cn.edu.zucc.ding.summerterm.model.MaterialsAndSuppliers;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 import cn.edu.zucc.ding.summerterm.util.DbException;
 
 import javax.swing.*;
@@ -137,6 +138,13 @@ public class FrmMaterials extends JPanel implements ActionListener{
             this.reloadTable(null,null,null);
         } else if (e.getSource() == this.Materials_sel) {
             String s = this.Materials_selectText.getText();
+            try {
+                if(!((DatabaseOP.isDouble(this.lowprice.getText())||this.lowprice.getText().equals(""))&&(DatabaseOP.isDouble(this.highprice.getText())||this.highprice.getText().equals(""))))
+                    throw new BaseException("价格区间输入非法");
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             this.reloadTable(s,lowprice.getText(),highprice.getText());
         } else if (e.getSource() == this.Materials_mod) {
             int i=this.Materials_infotable.getSelectedRow();

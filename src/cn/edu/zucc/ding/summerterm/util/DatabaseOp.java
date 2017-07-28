@@ -16,8 +16,10 @@ public class DatabaseOP {
     {
         try
         {
-            Double.parseDouble(str);
-            return true;
+            if(Double.parseDouble(str)>0)
+                return true;
+            else
+                return false;
         }
         catch(NumberFormatException ex){}
         return false;

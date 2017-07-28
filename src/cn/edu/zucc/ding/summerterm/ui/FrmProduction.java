@@ -8,7 +8,9 @@ import cn.edu.zucc.ding.summerterm.model.MaterialsAndDetails;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productiondetails;
 import cn.edu.zucc.ding.summerterm.model.Productiontype;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -337,7 +339,14 @@ public class FrmProduction extends JPanel implements ActionListener {
             int srp = table_production.getSelectedRow();
             this.reloadAllDetails(productions.get(srp));
         }else if(e.getSource()==this.sel_pro){
-            this.reloadAll(this.sel_pro_Text.getText(),this.low_text.getText(),this.high_text.getText());
+            try {
+                if(!((DatabaseOP.isDouble(this.low_text.getText())||this.low_text.getText().equals(""))&&(DatabaseOP.isDouble(this.high_text.getText())||this.low_text.getText().equals(""))))
+                    throw new BaseException("价格区间输入非法");
+                this.reloadAll(this.sel_pro_Text.getText(),this.low_text.getText(),this.high_text.getText());
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
         }
     }
 

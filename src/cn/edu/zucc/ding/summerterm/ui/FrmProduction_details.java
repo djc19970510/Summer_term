@@ -108,6 +108,9 @@ public class FrmProduction_details extends JDialog implements ActionListener {
                 pst = conn.prepareStatement(sql);
                 rs = pst.executeQuery();
                 if(rs.next()){
+                    rs.close();
+                    pst.close();
+                    conn.close();
                     throw new BaseException("产品细节中已有该材料信息");
                 }
                 rs.close();

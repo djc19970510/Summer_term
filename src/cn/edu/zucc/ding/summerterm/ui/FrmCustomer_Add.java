@@ -2,12 +2,19 @@ package cn.edu.zucc.ding.summerterm.ui;
 
 import cn.edu.zucc.ding.summerterm.control.CustomerControl;
 import cn.edu.zucc.ding.summerterm.model.Customer;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Period;
 
 public class FrmCustomer_Add extends JDialog implements ActionListener {
     private JLabel NameL =
@@ -53,10 +60,26 @@ public class FrmCustomer_Add extends JDialog implements ActionListener {
             if(this.NameT.getText().equals("")||this.AddressT.getText().equals("")||this.LinkNameT.getText().equals("")){
                 JOptionPane.showMessageDialog(null,  "信息填写不完全","提示",JOptionPane.ERROR_MESSAGE);
                 return;
-            }else if(!DatabaseOP.regex("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$",this.LinkPhoneT.getText())) {
+            }if(!DatabaseOP.regex("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$",this.LinkPhoneT.getText())) {
                 JOptionPane.showMessageDialog(null,  "联系人电话号码填写有误","提示",JOptionPane.ERROR_MESSAGE);
                 return;
-            }Customer c = new Customer(
+            }
+            try{
+                Connection conn = DBUtil.getConnection();
+                String sql = "select * from customer where Name=?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1,this.NameT.getText());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    throw new BaseException("客户姓名重复");
+                }
+            }catch (SQLException e1){
+                e1.printStackTrace();
+            }catch (BaseException e1){
+                e1.printStackTrace();
+            }
+
+            Customer c = new Customer(
                     0,
                     this.NameT.getText(),
                     this.AddressT.getText(),

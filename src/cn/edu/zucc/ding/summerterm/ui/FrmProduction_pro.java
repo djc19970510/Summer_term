@@ -5,12 +5,17 @@ import cn.edu.zucc.ding.summerterm.control.ProductionTypeControl;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productiontype;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FrmProduction_pro extends JDialog implements ActionListener{
@@ -79,6 +84,29 @@ public class FrmProduction_pro extends JDialog implements ActionListener{
                 return;
             }
             int i=type_chose.getSelectedIndex();
+            if(pro==null){
+                try{
+                    Connection conn = DBUtil.getConnection();
+                    String sql = "select * from production where Name=?";
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.setString(1,this.NameT.getText());
+                    ResultSet rs = pst.executeQuery();
+                    if(rs.next()){
+                        rs.close();
+                        pst.close();
+                        conn.close();
+                        throw new BaseException("产品名称重复");
+                    }
+                    rs.close();
+                    pst.close();
+                    conn.close();
+                }catch (SQLException e1){
+                    e1.printStackTrace();
+                }catch (BaseException e1){
+                    e1.printStackTrace();
+                    return;
+                }
+            }
             Production p = new Production(
                 pro!=null?pro.getID():0,this.NameT.getText(),Double.valueOf(this.PriceT.getText()),tmp.get(i).getID()
             );
