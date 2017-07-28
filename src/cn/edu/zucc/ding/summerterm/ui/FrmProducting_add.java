@@ -4,6 +4,7 @@ import cn.edu.zucc.ding.summerterm.control.*;
 import cn.edu.zucc.ding.summerterm.model.*;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 import hong.yelinggu.date.HongYeLingGuDate;
 import hong.yelinggu.date.absinterface.SelectHYDateAbstract;
 
@@ -47,6 +48,7 @@ public class FrmProducting_add extends JDialog implements ActionListener {
         this.add(productionbox);
         this.add(numberL);
         this.add(numberT);
+        timeT.setText(new Timestamp(System.currentTimeMillis()).toString());
         this.add(timeL);
         this.add(timeT);
         this.add(Add_OK);
@@ -65,9 +67,13 @@ public class FrmProducting_add extends JDialog implements ActionListener {
                 Connection conn = DBUtil.getConnection();
                 String sql = "select * from productionstore where ProductionID=?";
                 PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setInt(1,id);
                 ResultSet rs= pst.executeQuery();
                 if(!rs.next()){
                     throw new BaseException("该产品未设置存放仓库");
+                }
+                if(!DatabaseOP.isDouble(this.numberT.getText())){
+                    throw new BaseException("产品数量不合法");
                 }
             }catch (SQLException e1){
                 e1.printStackTrace();
@@ -77,33 +83,33 @@ public class FrmProducting_add extends JDialog implements ActionListener {
             }
             double number = Double.valueOf(this.numberT.getText());
             if (examMaterial(id, number)) {
+                System.out.println("in");
                 Productingorder po = new Productingorder(
                         -1, id, number, Timestamp.valueOf(this.timeT.getText())
                 );
                 (new ProductingOrderControl()).addProductingorder(po);
+                Connection conn=null;
                 try {
-                    Connection conn = DBUtil.getConnection();
-                    String sql = "select id from productingorder where ProductionID=? and ProductionNumber=? and Date=?";
+                    conn = DBUtil.getConnection();
+                    String sql = "select id from productingorder order by id DESC ";
                     PreparedStatement pst = conn.prepareStatement(sql);
-                    pst.setInt(1, id);
-                    pst.setDouble(2, number);
-                    pst.setTimestamp(3, Timestamp.valueOf(this.timeT.getText()));
                     ResultSet rs = pst.executeQuery();
                     int orderid;
                     if (rs.next()) {
                         orderid = rs.getInt(1);
-                        Materialsout(id, number, orderid, Timestamp.valueOf(this.timeT.getText()));
                         Productionin(id, number, orderid, Timestamp.valueOf(this.timeT.getText()));
+                        Materialsout(id, number, orderid, Timestamp.valueOf(this.timeT.getText()));
                     }
                     rs.close();
                     pst.close();
                     conn.close();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
+                } catch (BaseException e1){
+                    e1.printStackTrace();
+                    return;
                 }
             }
-
-
             this.setVisible(false);
             this.removeAll();
             fp.reloadTable(null);
@@ -119,12 +125,20 @@ public class FrmProducting_add extends JDialog implements ActionListener {
             Connection conn = DBUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
+            if(!rs.next()){
+                try {
+                    throw new BaseException("材料仓库不存在或产品细节出错");
+                } catch (BaseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            do{
                 if (rs.getDouble(1) * number > rs.getDouble(2)) {
                     JOptionPane.showMessageDialog(null, "库存不足", "提示", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
-            }
+            }while (rs.next());
             rs.close();
             pst.close();
             conn.close();
@@ -165,7 +179,7 @@ public class FrmProducting_add extends JDialog implements ActionListener {
 
     }
 
-    private void Productionin(int proid, double number, int orderid, Timestamp time) {
+    private void Productionin(int proid, double number, int orderid, Timestamp time) throws BaseException {
         try {
             int storeid;
             Connection conn = DBUtil.getConnection();
@@ -183,7 +197,7 @@ public class FrmProducting_add extends JDialog implements ActionListener {
                         )
                 );
             } else {
-                JOptionPane.showMessageDialog(null, "此产品无仓库", "提示", JOptionPane.ERROR_MESSAGE);
+                throw new BaseException("此产品无存放地点");
             }
             rs.close();
             pst.close();

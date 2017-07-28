@@ -10,6 +10,7 @@ import cn.edu.zucc.ding.summerterm.model.Materialsstore;
 import cn.edu.zucc.ding.summerterm.model.Materialsstoreorder;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 import com.sun.org.apache.regexp.internal.RE;
 
 import javax.swing.*;
@@ -53,6 +54,7 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
         this.add(priceT);
         this.add(DateL);
         this.add(DateT);
+        DateT.setText(new Timestamp(System.currentTimeMillis()).toString());
         this.add(Add_OK);
         this.add(Add_Cancel);
         this.Add_Cancel.addActionListener(this);
@@ -68,6 +70,9 @@ public class FrmOrder_buymaterials extends JDialog implements ActionListener {
             Connection conn = null;
             String sql = "select id from materialsstore where MaterialsID=?";
             try {
+                if(!DatabaseOP.isDouble(this.numberT.getText())||!DatabaseOP.isDouble(this.priceT.getText())){
+                    throw new BaseException("数量或价格输入不合法");
+                }
                 conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
                 pst.setInt(1,m.getID());

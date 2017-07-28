@@ -95,10 +95,10 @@ public class FrmStore_addm extends JDialog implements ActionListener {
                 PreparedStatement pst = conn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    Materialsstore ms = new Materialsstore(
-                            this.ms.getID(),this.ms.getNumber(),this.addressT.getText(),id
+                    Materialsstore mst = new Materialsstore(
+                            rs.getInt(1),rs.getDouble(3),this.addressT.getText(),id
                     );
-                    (new MaterialsStoreControl()).modifyMaterialsstore(ms);
+                    (new MaterialsStoreControl()).modifyMaterialsstore(mst);
                 }else{
                     Materialsstore ms = new Materialsstore(
                             0,0,this.addressT.getText(),id

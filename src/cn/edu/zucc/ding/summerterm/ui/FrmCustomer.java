@@ -4,12 +4,18 @@ import cn.edu.zucc.ding.summerterm.control.CustomerControl;
 import cn.edu.zucc.ding.summerterm.control.SupplierControl;
 import cn.edu.zucc.ding.summerterm.model.Customer;
 import cn.edu.zucc.ding.summerterm.model.Supplier;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FrmCustomer extends JPanel implements ActionListener{
@@ -83,7 +89,22 @@ public class FrmCustomer extends JPanel implements ActionListener{
                 return;
             }
             Customer cu = this.customers.get(i);
+            try {
+                Connection conn = DBUtil.getConnection();
+                String sql = "select * from productionorder where CustomerID="+cu.getID();
+                PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    throw new BaseException("系统中存在改客户订单，无法删除");
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             (new CustomerControl()).delCustomer(cu);
+            this.reloadTable(null);
         } else if (e.getSource() == this.Customer_sel) {
             String s = this.Customer_selectText.getText();
             this.reloadTable(s);

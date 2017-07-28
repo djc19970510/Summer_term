@@ -278,12 +278,30 @@ public class FrmProduction extends JPanel implements ActionListener {
                 return;
             }
             Production pro = productions.get(sr);
-            int res = JOptionPane.showConfirmDialog(null, "确认删除该产品信息（包括该产品细节）", "提示", JOptionPane.YES_NO_OPTION);
+            try{
+                Connection conn = DBUtil.getConnection();
+                String sql = "select * from productionstoreorder where ProductionID="+pro.getID();
+                PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    throw new BaseException("系统中存在产品相关订单，无法删除");
+                }
+            }catch (SQLException e1){
+                e1.printStackTrace();
+            }catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
+            int res = JOptionPane.showConfirmDialog(null, "确认删除该产品信息（包括该产品细节以及仓库信息）", "提示", JOptionPane.YES_NO_OPTION);
             if(res == JOptionPane.YES_OPTION){
-                String sql = "delete from productiondetails where productionid=?";
+
                 try {
                     Connection conn = DBUtil.getConnection();
+                    String sql = "delete from productionstore where productionid="+pro.getID();
                     PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.execute();
+                    sql = "delete from productiondetails where productionid=?";
+                    pst = conn.prepareStatement(sql);
                     pst.setInt(1,pro.getID());
                     pst.execute();
                     sql = "delete from production where id=?";

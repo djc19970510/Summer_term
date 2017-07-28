@@ -20,7 +20,7 @@ public class FrmProducting extends JPanel implements ActionListener {
     private JButton Producting_add = new JButton("生产");
     private JButton Producting_sel = new JButton("查询");
     private JTextField Producting_selectText = new JTextField(15);
-    private Object tblTitle[] = {"序号","产品名", "生产数量", "时间"};
+    private Object tblTitle[] = {"序号","生产订单","产品名", "生产数量", "时间"};
     private Object tblData[][];
     DefaultTableModel tablmod = new DefaultTableModel();
     List<OrderAndProduction> productingorders;
@@ -52,12 +52,13 @@ public class FrmProducting extends JPanel implements ActionListener {
             productingorders = (new OtherControl()).loadAllProductingorder();
         //else
             //productingorders = (new ProductingOrderControl()).loadSomeCustomer(s);
-        tblData = new Object[productingorders.size()][4];
+        tblData = new Object[productingorders.size()][5];
         for (int i = 0; i < productingorders.size(); i++) {
             tblData[i][0] = i+1 + "";
-            tblData[i][1] = productingorders.get(i).getName();
-            tblData[i][2] = productingorders.get(i).getProductionNumber();
-            tblData[i][3] = productingorders.get(i).getDate();
+            tblData[i][1] = productingorders.get(i).getID();
+            tblData[i][2] = productingorders.get(i).getName();
+            tblData[i][3] = productingorders.get(i).getProductionNumber();
+            tblData[i][4] = productingorders.get(i).getDate();
         }
         tablmod.setDataVector(tblData, tblTitle);
         this.Producting_infotable.validate();

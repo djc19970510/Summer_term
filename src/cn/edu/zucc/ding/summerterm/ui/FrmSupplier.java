@@ -3,12 +3,17 @@ package cn.edu.zucc.ding.summerterm.ui;
 import cn.edu.zucc.ding.summerterm.control.SupplierControl;
 import cn.edu.zucc.ding.summerterm.model.Supplier;
 import cn.edu.zucc.ding.summerterm.util.BaseException;
+import cn.edu.zucc.ding.summerterm.util.DBUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FrmSupplier extends JPanel implements ActionListener {
@@ -84,8 +89,23 @@ public class FrmSupplier extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(null,  "请选择要删除的供应商","提示",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            Supplier s= suppliers.get(sr);
+            try {
+                Connection conn = DBUtil.getConnection();
+                String sql = "select * from materials where SupplierID="+s.getID();
+                PreparedStatement pst = conn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    throw new BaseException("系统中存在由该供应商提供的材料，无法删除");
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (BaseException e1){
+                e1.printStackTrace();
+                return;
+            }
             SupplierControl sc = new SupplierControl();
-            sc.delSupplier(suppliers.get(sr));
+            sc.delSupplier(s);
             this.reloadTable(null);
         } else if (e.getSource() == this.Supplier_sel) {
             String s = this.Supplier_selectText.getText();

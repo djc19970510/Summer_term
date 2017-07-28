@@ -101,11 +101,6 @@ public class MaterialsControl implements IMaterialsControl {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            try {
-                throw new DbException(e);
-            } catch (DbException e2) {
-                e2.printStackTrace();
-            }
         }
     }
 }

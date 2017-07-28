@@ -61,6 +61,7 @@ public class FrmOrder extends JPanel implements ActionListener {
         this.setVisible(true);
         this.setLayout(new BorderLayout());
         this.add(left,BorderLayout.EAST);
+            this.left.setPreferredSize(new Dimension(600,800));
             left.setLayout(new BorderLayout());
             left.add(Ordersp_infotableheader,BorderLayout.CENTER);
             left.add(left_top,BorderLayout.NORTH);
@@ -71,6 +72,8 @@ public class FrmOrder extends JPanel implements ActionListener {
             center.add(buy);
             center.add(sold);
         this.add(right,BorderLayout.WEST);
+
+            this.right.setPreferredSize(new Dimension(600,800));
             right.setLayout(new BorderLayout());
             right.add(Ordersm_infotableheader,BorderLayout.CENTER);
             right.add(right_top,BorderLayout.NORTH);

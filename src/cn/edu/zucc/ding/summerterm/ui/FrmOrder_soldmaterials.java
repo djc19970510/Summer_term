@@ -5,7 +5,9 @@ import cn.edu.zucc.ding.summerterm.model.Customer;
 import cn.edu.zucc.ding.summerterm.model.Production;
 import cn.edu.zucc.ding.summerterm.model.Productionorder;
 import cn.edu.zucc.ding.summerterm.model.Productionstoreorder;
+import cn.edu.zucc.ding.summerterm.util.BaseException;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
+import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,6 +60,7 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
         this.add(priceT);
         this.add(DateL);
         this.add(DateT);
+        DateT.setText(new Timestamp(System.currentTimeMillis()).toString());
         this.add(customerL);
         this.add(customersbox);
         this.add(Add_OK);
@@ -75,6 +78,9 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
             Production p = productions.get(sr);
             Customer c = customers.get(src);
             try {
+                if(!DatabaseOP.isDouble(this.numberT.getText())||!DatabaseOP.isDouble(this.priceT.getText())){
+                    throw new BaseException("数量或价格输入不合法");
+                }
                 String sql = "select number from productionstore where ProductionID="+p.getID();
                 Connection conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
@@ -90,6 +96,8 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            }catch (BaseException e1){
+                e1.printStackTrace();
             }
 
 
@@ -100,11 +108,6 @@ public class FrmOrder_soldmaterials extends JDialog implements ActionListener{
             try {
                 Connection conn = DBUtil.getConnection();
                 PreparedStatement pst = conn.prepareStatement(sql);
-//                pst.setDouble(1,Double.valueOf(priceT.getText()));
-//                pst.setDouble(2,Double.valueOf(numberT.getText()));
-//                pst.setInt(3,p.getID());
-//                pst.setTimestamp(4,Timestamp.valueOf(DateT.getText()));
-//                pst.setInt(5,c.getID());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     id=rs.getInt(1);

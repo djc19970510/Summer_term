@@ -4,7 +4,9 @@ import cn.edu.zucc.ding.summerterm.Icontrol.ICustomerControl;
 import cn.edu.zucc.ding.summerterm.model.Customer;
 import cn.edu.zucc.ding.summerterm.util.DBUtil;
 import cn.edu.zucc.ding.summerterm.util.DatabaseOP;
+import cn.edu.zucc.ding.summerterm.util.DbException;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,7 +76,11 @@ public class CustomerControl implements ICustomerControl {
             pst.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e1) {
+                e1.printStackTrace();
+            }
         }
         return result;
     }
@@ -94,7 +100,11 @@ public class CustomerControl implements ICustomerControl {
             pst.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -112,12 +122,16 @@ public class CustomerControl implements ICustomerControl {
             pst.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
     @Override
-    public void delCustomer(Customer customer) {
+    public void delCustomer(Customer customer){
         String sql = DatabaseOP.delete(customer);
         try {
             Connection conn = DBUtil.getConnection();
@@ -126,7 +140,11 @@ public class CustomerControl implements ICustomerControl {
             pst.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                throw new DbException(e);
+            } catch (DbException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

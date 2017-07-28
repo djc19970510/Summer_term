@@ -124,13 +124,9 @@ public class FrmMaterials extends JPanel implements ActionListener{
                 conn.close();
             } catch (SQLException e1) {
                 e1.printStackTrace();
-                try {
-                    throw new DbException(e1);
-                } catch (DbException e2) {
-                    e2.printStackTrace();
-                }
             }catch (BaseException e2){
                 e2.printStackTrace();
+                return;
             }
             Materials m = new Materials();
             m.setID(mas.getID());
