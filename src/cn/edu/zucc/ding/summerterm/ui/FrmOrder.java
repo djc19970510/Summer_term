@@ -23,6 +23,8 @@ public class FrmOrder extends JPanel implements ActionListener {
     private JButton sold = new JButton("卖出产品");
     private JButton sel_m = new JButton("查询");
     private JButton sel_p = new JButton("查询");
+    private JButton coll_m = new JButton("统计");
+    private JButton coll_p = new JButton("统计");
     private JTextField text_m = new JTextField(10);
     private JTextField text_p = new JTextField(10);
 
@@ -68,6 +70,7 @@ public class FrmOrder extends JPanel implements ActionListener {
             left_top.setLayout(new FlowLayout());
             left_top.add(text_p);
             left_top.add(sel_p);
+            left_top.add(coll_p);
         this.add(center,BorderLayout.CENTER);
             center.add(buy);
             center.add(sold);
@@ -80,12 +83,15 @@ public class FrmOrder extends JPanel implements ActionListener {
             right_top.setLayout(new FlowLayout());
             right_top.add(text_m);
             right_top.add(sel_m);
+            right_top.add(coll_m);
         this.reloadm(null);
         this.reloadp(null);
         this.buy.addActionListener(this);
         this.sold.addActionListener(this);
         this.sel_p.addActionListener(this);
         this.sel_m.addActionListener(this);
+        this.coll_p.addActionListener(this);
+        this.coll_m.addActionListener(this);
     }
 
     public void reloadp(String s){
@@ -136,6 +142,14 @@ public class FrmOrder extends JPanel implements ActionListener {
             this.reloadm(this.text_m.getText());
         }else if(e.getSource()==this.sel_p){
             this.reloadp(this.text_p.getText());
+        }else if(e.getSource()==this.coll_m){
+            FrmOrder_collm dlg = new FrmOrder_collm("近一个月材料采购统计图");
+            dlg.pack();//以合适的大小显示
+            dlg.setVisible(true);
+        }else if(e.getSource()==this.coll_p){
+            FrmOrder_collp dlg = new FrmOrder_collp("近一个月产品出售统计图");
+            dlg.pack();//以合适的大小显示
+            dlg.setVisible(true);
         }
     }
 }

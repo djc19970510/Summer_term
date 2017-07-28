@@ -4,14 +4,24 @@ import cn.edu.zucc.ding.summerterm.Icontrol.getID;
 import cn.edu.zucc.ding.summerterm.model.Customer;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DatabaseOP {
+    public static Timestamp getdate() // //获取前后日期 i为正数 向后推迟i天，负数时向前提前i天
+    {
+        Date dat = null;
+        Calendar cd = Calendar.getInstance();
+        cd.roll(Calendar.MONTH, -1);
+        dat = cd.getTime();
+        SimpleDateFormat dformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp date = Timestamp.valueOf(dformat.format(dat));
+        return date;
+    }
+
     public static boolean isDouble(String str)
     {
         try
